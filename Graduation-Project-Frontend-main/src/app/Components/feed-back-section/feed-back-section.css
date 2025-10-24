@@ -1,0 +1,49 @@
+.feedback-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-primary-soft {
+  background-color: rgba(113, 157, 201, 0.1);
+}
+
+.text-primary {
+  color: #719dc9 !important;
+}
+
+.btn-primary {
+  background-color: #719dc9;
+  border-color: #719dc9;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #5a8ab8;
+    border-color: #5a8ab8;
+  }
+}
+
+.btn-outline-primary {
+  color: #719dc9;
+  border-color: #719dc9;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #f0f7ff;
+    color: #5a8ab8;
+    border-color: #5a8ab8;
+  }
+}
+
+.shadow-sm-hover {
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(113, 157, 201, 0.15) !important;
+  }
+}
+
+/* Ensure stars display correctly */
+.text-warning {
+  color: #ffc107 !important;
+}

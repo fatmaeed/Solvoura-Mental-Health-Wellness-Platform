@@ -1,0 +1,285 @@
+.doctor-sidebar {
+  width: 280px;
+  height: 100vh;
+  background: linear-gradient(135deg, #6494c4 0%, #8cc2a7 100%);
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+.content-area {
+  margin-left: 280px; /* same as sidebar width */
+  justify-content: center;     /* center horizontally */
+  align-items: center;         /* center vertically */
+  min-height: 100vh;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ff6b6b;
+}
+
+.logout-btn i {
+  margin-right: 10px;
+}
+
+.sidebar-header {
+  text-align: center;
+  padding: 0 20px 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-container {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.avatar-container:hover {
+  transform: scale(1.05);
+}
+
+.doctor-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.specialization {
+  font-size: 0.9rem;
+  color: white;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.sidebar-menu {
+  flex: 1;
+  padding: 0 15px;
+  list-style: none;
+  margin: 0;
+}
+
+.menu-item {
+  margin-bottom: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.menu-item.active {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item.active .menu-link {
+  color: #517fb0;
+}
+
+.menu-item.active .menu-link i {
+  color: #517fb0;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+.menu-link i {
+  font-size: 1.1rem;
+  color: white;
+  margin-right: 12px;
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover .menu-link i {
+  transform: scale(1.1);
+}
+
+.session-badge {
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 10px;
+  margin-left: auto;
+}
+
+.sidebar-footer {
+  padding: 20px;
+  margin-top: auto;
+}
+
+.logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ff6b6b;
+}
+
+.logout-btn i {
+  margin-right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.logout-btn:hover i {
+  transform: translateX(-3px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .doctor-sidebar {
+    width: 80px;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .sidebar-header {
+    padding: 0 10px 20px;
+  }
+
+  .avatar-container {
+    width: 50px;
+    height: 50px;
+  }
+
+  .doctor-name,
+  .specialization,
+  .menu-link span,
+  .logout-btn span {
+    display: none;
+  }
+
+  .menu-link {
+    justify-content: center;
+    padding: 15px 0;
+  }
+
+  .menu-link i {
+    margin-right: 0;
+    font-size: 1.3rem;
+  }
+
+  .session-badge {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+  }
+
+
+
+}
+
+@media (max-width: 768px) {
+  .doctor-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 15px;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding-bottom: 15px;
+  }
+
+  .avatar-container {
+    margin: 0 15px 0 0;
+  }
+
+  .doctor-name,
+  .specialization,
+  .menu-link span,
+  .logout-btn span {
+    display: block;
+  }
+
+  .sidebar-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .menu-item {
+    flex: 1 0 calc(50% - 10px);
+    margin-bottom: 0;
+  }
+
+  .menu-link {
+    justify-content: flex-start;
+    padding: 12px 15px;
+  }
+
+  .menu-link i {
+    margin-right: 10px;
+  }
+
+  .content-area {
+    margin-left: 0;
+    padding: 15px;
+  }
+}

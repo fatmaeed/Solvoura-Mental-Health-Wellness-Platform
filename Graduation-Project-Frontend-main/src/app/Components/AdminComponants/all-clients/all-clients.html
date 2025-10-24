@@ -1,0 +1,59 @@
+<div class="admin-dashboard-container">
+
+  <main class="main-content-container">
+    <div class="content-header">
+      <h2 class="page-title">All Clients</h2>
+    </div>
+
+    <div class="content-card">
+      <div class="table-container rounded-5 shadow-sm">
+        <table class="service-providers-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+              <th>Address</th>
+              <th>Gender</th>
+              <th>Verified</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (c of clients; track c.id) {
+              <tr>
+                <td>{{ c.firstName }} {{ c.lastName }}</td>
+                <td>{{ c.email }}</td>
+                <td>{{ c.phoneNumber }}</td>
+                <td>{{ c.address }}</td>
+                <td>{{ c.gender }}</td>
+                <td>{{ c.isVerified }}</td>
+                <td class="d-flex gap-2">
+                  <button class="action-btn view-btn" (click)="goToDetails(c.id)">
+                    <i class="bi bi-eye-fill"></i> Details
+                  </button>
+                  <button class="action-btn edit-btn" (click)="goToUpdate(c.id)">
+                    <i class="bi bi-pencil-square"></i> Update
+                  </button>
+                  <button class="action-btn delete-btn" (click)="deleteClient(c.id)">
+                    <i class="bi bi-trash"></i> Delete
+                  </button>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr class="empty-row">
+                <td colspan="11">
+                  <div class="empty-state">
+                    <i class="bi bi-people empty-icon"></i>
+                    <p>No Clients found</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

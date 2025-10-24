@@ -1,0 +1,13 @@
+@if (href) {
+
+  <a [href]="href"
+     class="btn btn-outline-primary px-4 py-2 d-inline-block">
+    {{ text }}
+  </a>
+} @else {
+  <button type="button"
+          class="btn btn-outline-primary px-4 py-2"
+          (click)="action?.()">
+    {{ text }}
+  </button>
+}

@@ -1,0 +1,37 @@
+<div class="professionals-section py-3" id="sp" style="background-color: #fff;">
+  <div class="container">
+    <div class="text-center mb-3">
+      <h2 class="display-5 fw-bold  mb-1" style="color: #719dc9;">Meet Our Professionals</h2>
+      <p class="lead text-muted mb-3 mx-auto" style="max-width: 600px;">
+        Licensed, experienced mental health professionals ready to support your journey
+      </p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+      @for (provider of serviceProviders.slice(0, 4); track $index) {
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+          <div class="card-hover h-100" style="transition: transform 0.3s ease;">
+            <app-service-provider-card [provider]="provider"></app-service-provider-card>
+          </div>
+        </div>
+      }
+    </div>
+
+    <div class="text-center mt-5 mb-2">
+      <button
+        (click)="seeAllProviders()"
+        [style]="{
+          'background-color': 'transparent',
+          'color': '#719dc9',
+          'border': '2px solid #719dc9',
+          'padding': '0.5rem 2rem',
+          'border-radius': '50px',
+          'font-weight': '500',
+          'transition': 'all 0.3s ease'
+        }"
+      >
+        View All Professionals <i class="bi bi-arrow-right ms-2"></i>
+      </button>
+    </div>
+  </div>
+</div>

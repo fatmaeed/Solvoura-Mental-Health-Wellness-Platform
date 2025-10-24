@@ -1,0 +1,41 @@
+<section class="feedback-section py-5" style="background-color: #ddebe2;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold mb-3" style="color: #2b333b;">What Our Clients Say</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 700px;">
+        Hear from people who found support and transformation through MindConnect
+      </p>
+    </div>
+
+    <div class="row g-4">
+      @for (testimonial of testimonials; track testimonial.name) {
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-sm-hover" style="transition: all 0.3s ease;">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center mb-4">
+                <img [src]="testimonial.image" [alt]="testimonial.name"
+                     class="rounded-circle me-3" width="60" height="60">
+                <div>
+                  <h5 class="mb-1">{{ testimonial.name }}</h5>
+                  <div class="d-flex text-warning mb-1">
+                    @for (i of getFilledStars(testimonial.stars); track i) {
+                      <i class="bi bi-star-fill"></i>
+                    }
+                    @if (testimonial.stars % 1 !== 0) {
+                      <i class="bi bi-star-half"></i>
+                    }
+                  </div>
+                  <small class="text-muted">{{ testimonial.role }}</small>
+                </div>
+              </div>
+              <p class="card-text text-muted">"{{ testimonial.text }}"</p>
+            </div>
+            <div class="card-footer bg-transparent border-top-0 pt-0">
+              <small class="text-muted">{{ testimonial.joined }}</small>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>

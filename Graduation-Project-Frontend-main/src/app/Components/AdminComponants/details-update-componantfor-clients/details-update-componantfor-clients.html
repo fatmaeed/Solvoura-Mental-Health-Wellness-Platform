@@ -1,0 +1,105 @@
+@if (client) {
+
+  <div class="admin-container">
+    <main class="content">
+      <div class="content-header d-flex justify-content-between align-items-center">
+        <h2 class="page-title">
+          {{ isEditMode ? 'Edit Client' : 'Client Details' }}
+        </h2>
+        @if (!isEditMode) {
+          <button class="edit-btn" (click)="isEditMode = true">
+            <i class="bi bi-pencil"></i> Edit
+          </button>
+        }
+      </div>
+
+      @if (isEditMode) {
+        <form (ngSubmit)="onSave()" #form="ngForm" class="edit-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First Name</label>
+              <input class="form-input" name="firstName" [(ngModel)]="client.firstName" required />
+            </div>
+
+            <div class="form-group">
+              <label>Last Name</label>
+              <input class="form-input" name="lastName" [(ngModel)]="client.lastName" required />
+            </div>
+
+            <div class="form-group">
+              <label>Address</label>
+              <input class="form-input" name="address" [(ngModel)]="client.address" />
+            </div>
+
+            <div class="form-group">
+              <label>Birth Date</label>
+              <input class="form-input" type="date" name="birthDate" [(ngModel)]="client.birthDate" />
+            </div>
+
+            <div class="form-group full-width">
+              <label>History of Illness</label>
+              <textarea class="form-input" name="historyIllness" rows="3" [(ngModel)]="client.historyIllness"></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="cancel-btn" (click)="isEditMode = false">Cancel</button>
+            <button type="submit" class="save-btn" [disabled]="form.invalid">Save Changes</button>
+          </div>
+        </form>
+      }
+
+      @if (!isEditMode) {
+        <div class="details-card">
+          <div class="details-grid">
+            <div class="detail-item">
+              <span class="detail-label">Name:</span>
+              <span class="detail-value">{{ client.firstName }} {{ client.lastName }}</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Email:</span>
+              <span class="detail-value">{{ client.email }}</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Phone:</span>
+              <span class="detail-value">{{ client.phoneNumber }}</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Address:</span>
+              <span class="detail-value">{{ client.address }}</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Birth Date:</span>
+              <span class="detail-value">{{ client.birthDate | date }}</span>
+            </div>
+
+            <div class="detail-item">
+              <span class="detail-label">Gender:</span>
+              <span class="detail-value">{{ client.gender }}</span>
+            </div>
+
+            <div class="detail-item full-width">
+              <span class="detail-label">History of Illness:</span>
+              <p class="detail-value">{{ client.historyIllness }}</p>
+            </div>
+          </div>
+
+          @if (client.userImagePath) {
+            <div class="images-section">
+              <h3>Profile Image</h3>
+              <img [src]="baseUrl + client.userImagePath" alt="Profile Image" class="document-image" />
+            </div>
+          }
+        </div>
+      }
+
+   
+
+    </main>
+  </div>
+
+  }

@@ -1,0 +1,53 @@
+<div class="signup-container px-3">
+
+  <div class="header text-center mb-0">
+
+    <img src="assets/images/logo3.png" class="logo-img" alt="Soulvoura Logo" />
+    <h1 class="logo-title">Solvoura</h1>
+
+
+  </div>
+
+
+ <div class="signup-card text-center shadow-lg ">
+         <div class="back-home-container">
+      <a
+        (click)="goToHome()"
+        class="back-home-button"
+        aria-label="Back to Home"
+      >
+        <i class="bi bi-x-lg"></i>
+      </a>
+    </div>
+
+    <h3 class="form-title fw-bold fs-3">Create Account</h3>
+    <p class="subtitle text-muted">Choose your account type and fill in your details</p>
+
+    <div class="account-type-toggle d-flex  align-items-center  my-1">
+      <button
+        class="toggle-btn w-100"
+        [class.active]="accountType === 'needSupport'"
+        (click)="toggleAccountType('needSupport')">
+        I need support
+      </button>
+      <button
+        class="toggle-btn w-100"
+        [class.active]="accountType === 'professional'"
+        (click)="toggleAccountType('professional')">
+        I'm a professional
+      </button>
+    </div>
+
+    @if (accountType === 'needSupport') {
+      <app-sign-up-as-client (register)="onRegister($event)"         [errorMessage]="errorMessage"
+      ></app-sign-up-as-client>
+    }
+    @if (accountType === 'professional') {
+      <app-sign-up-as-professional [errorMessage]="errorMessage" (register)="onRegister($event)"></app-sign-up-as-professional>
+    }
+    <div class="login-link">
+      Already have an account? <a class="login-link-text" (click)="goToLogin()">Sign in</a>
+    </div>
+  </div>
+
+</div>

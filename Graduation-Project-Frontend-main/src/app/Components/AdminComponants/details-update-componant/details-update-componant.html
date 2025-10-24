@@ -1,0 +1,157 @@
+<div class="admin-container">
+  <main class="content">
+    <div class="content-header d-flex justify-content-between align-items-center">
+
+      <h2  class="page-title">{{ isEditMode ? 'Edit Service Provider' : 'Service Provider Details' }}</h2>
+      <button *ngIf="!isEditMode" class="edit-btn" (click)="isEditMode = true">
+        <i class="bi bi-pencil"></i> Edit
+      </button>
+    </div>
+
+    <form *ngIf="isEditMode" (ngSubmit)="onSave()" #form="ngForm" class="edit-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>First Name</label>
+          <input class="form-input" name="firstName" [(ngModel)]="serviceProvider.firstName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Last Name</label>
+          <input class="form-input" name="lastName" [(ngModel)]="serviceProvider.lastName" required>
+        </div>
+
+        <div class="form-group">
+          <label>Specialization</label>
+          <input class="form-input" name="specialization" [(ngModel)]="serviceProvider.specialization">
+        </div>
+
+        <div class="form-group">
+          <label>Years of Experience</label>
+          <input class="form-input" type="number" name="numberOfExp" [(ngModel)]="serviceProvider.numberOfExp">
+        </div>
+
+        <div class="form-group">
+          <label>Price per Hour (EGP)</label>
+          <input class="form-input" type="number" name="pricePerHour" [(ngModel)]="serviceProvider.pricePerHour">
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <input class="form-input" name="address" [(ngModel)]="serviceProvider.address">
+        </div>
+
+        <div class="form-group">
+          <label>Clinic Location</label>
+          <input class="form-input" name="clinicLocation" [(ngModel)]="serviceProvider.clinicLocation">
+        </div>
+
+        <div class="form-group full-width">
+          <label>Description</label>
+          <textarea class="form-input" name="description" rows="3" [(ngModel)]="serviceProvider.description"></textarea>
+        </div>
+
+        <div class="form-group full-width">
+          <label>Experience Details</label>
+          <textarea class="form-input" name="experience" rows="3" [(ngModel)]="serviceProvider.experience"></textarea>
+        </div>
+
+
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="cancel-btn" (click)="isEditMode = false">
+          Cancel
+        </button>
+        <button type="submit" class="save-btn" [disabled]="form.invalid">
+          Save Changes
+        </button>
+      </div>
+    </form>
+
+    <!-- View Mode -->
+    <div *ngIf="!isEditMode" class="details-card">
+      <div class="details-grid">
+        <div class="detail-item">
+          <span class="detail-label">Name:</span>
+          <span class="detail-value">{{ serviceProvider.firstName }} {{ serviceProvider.lastName }}</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Specialization:</span>
+          <span class="detail-value">{{ serviceProvider.specialization }}</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Experience:</span>
+          <span class="detail-value">{{ serviceProvider.numberOfExp }} years</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Price/Hour:</span>
+          <span class="detail-value">{{ serviceProvider.pricePerHour }} EGP</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Address:</span>
+          <span class="detail-value">{{ serviceProvider.address }}</span>
+        </div>
+
+        <div class="detail-item">
+          <span class="detail-label">Clinic Location:</span>
+          <span class="detail-value">{{ serviceProvider.clinicLocation }}</span>
+        </div>
+
+
+
+        <div class="detail-item full-width">
+          <span class="detail-label">Description:</span>
+          <p class="detail-value">{{ serviceProvider.description }}</p>
+        </div>
+
+        <div class="detail-item full-width">
+          <span class="detail-label">Experience Details:</span>
+          <p class="detail-value">{{ serviceProvider.experience }}</p>
+        </div>
+      </div>
+
+      <!-- Images Section -->
+      <div class="images-section">
+        <h3>Verification Documents</h3>
+        <div class="images-grid">
+          <div class="image-container">
+            <label>Profile Image</label>
+            <img [src]="baseUrl + serviceProvider.userImagePath" alt="Profile" class="document-image">
+          </div>
+         @if(serviceProvider.nationalImagePath == null) {
+             <div class="image-container">
+            <label>National ID</label>
+            <img [src]="baseUrl + serviceProvider.nationalImagePath" alt="National ID" class="document-image">
+          </div>
+         }
+       @if(serviceProvider.userAndNationalImagePath == null) {
+            <div class="image-container">
+            <label>Combined Image</label>
+            <img [src]="baseUrl + serviceProvider.userAndNationalImagePath" alt="Combined" class="document-image">
+          </div>
+       }
+        </div>
+      </div>
+
+      <!-- Certificates Section -->
+      <div class="certificates-section">
+        <h3>Certificates</h3>
+        <div *ngIf="serviceProvider.certificates?.length; else noCerts" class="certificates-grid">
+          <div *ngFor="let cert of serviceProvider.certificates" class="certificate-item">
+            <a [href]="baseUrl + cert.image" target="_blank" class="certificate-link">
+              <i class="bi bi-file-earmark-text"></i>
+              <span>{{ cert.certificateName }}</span>
+            </a>
+          </div>
+        </div>
+        <ng-template #noCerts>
+          <p class="no-certificates">No certificates available</p>
+        </ng-template>
+      </div>
+    </div>
+  </main>
+</div>

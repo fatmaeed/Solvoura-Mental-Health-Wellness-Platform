@@ -1,0 +1,77 @@
+.dashboard-container {
+  background-color: #fff;
+  min-height: 100vh;
+}
+.welcome-card {
+  background: linear-gradient(135deg, #6494c4 0%, #8cc2a7 100%);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.avatar-circle {
+  width: 100px;
+  height: 100px;
+  background-color: #517fb0;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 32px;
+  text-transform: uppercase;
+  font-family: 'Segoe UI', sans-serif;
+  margin: auto;
+}
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+.text-white-80 {
+  color: rgba(255, 255, 255, 0.8);
+}
+.nav-tabs {
+  border-bottom: none;
+}
+
+.nav-tabs .nav-link {
+  color: #495057;
+  border: none;
+  padding: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.nav-tabs .nav-link.active {
+  color: #6494c4;
+  background-color: transparent;
+  border-bottom: 3px solid #6494c4;
+}
+
+.nav-tabs .nav-link:hover:not(.active) {
+  color: #8cc2a7;
+}
+
+.instruction-section {
+  background-color: #f8fafc;
+  border-radius: 8px;
+  padding: 1.5rem;
+  height: 100%;
+}
+
+.list-group-item {
+  padding: 0.5rem 0;
+  background-color: transparent;
+}
+@media (max-width: 768px) {
+  .profile-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .nav-tabs .nav-link {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+}

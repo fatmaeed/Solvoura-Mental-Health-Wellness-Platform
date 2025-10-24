@@ -1,0 +1,146 @@
+<nav class="navbar sticky-top navbar-expand-lg bg-white py-1 shadow-sm">
+  <div class="container">
+    <a
+      class="navbar-brand d-flex align-items-center text-decoration-none"
+      [routerLink]="['/']"
+    >
+      <img src="assets/images/logo3.png" class="logo-img" alt="Logo" />
+      <span class="brand-name">SOLVOURA</span>
+    </a>
+
+    <button
+      class="navbar-toggler custom-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mwNavbar"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mwNavbar">
+      <ul class="navbar-nav mx-auto gap-1">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            fragment="services"
+            routerLinkActive="active-link"
+            >Services</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            fragment="sp"
+            routerLinkActive="active-link"
+            >Find Professionals</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/']"
+            fragment="about"
+            routerLinkActive="active-link"
+            >About Us</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            [routerLink]="['/community']"
+            routerLinkActive="active-link"
+            >Community</a
+          >
+        </li>
+      </ul>
+
+      @if (accountService.isLoggedIn()) {
+      <div class="d-flex align-items-center gap-2 ms-lg-3">
+        <button
+          class="notification-btn position-relative"
+          (click)="toggleDropdown()"
+        >
+          <i class="bi bi-bell-fill"></i>
+          <span
+            *ngIf="ureadCount > 0"
+            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+          >
+            {{ureadCount}}
+            <span class="visually-hidden">unread notifications</span>
+          </span>
+        </button>
+        <div
+          class="notification-dropdown"
+          *ngIf="isOpen"
+          (click)="$event.stopPropagation()"
+        >
+          <div class="notification-header">
+            <h3>Notifications</h3>
+            <button class="mark-all-read" (click)="markAllAsRead()">
+              Mark all as read
+            </button>
+          </div>
+
+          <div class="notification-list">
+            <div
+              *ngFor="let notification of notifications"
+              class="notification-item"
+              [class.unread]="!notification.readed"
+              (click)="handleNotificationClick(notification)"
+            >
+              <div class="notification-avatar">
+                <i class="bi bi-bell-fill fs-4 text-primary"></i>
+              </div>
+              <div class="notification-content" (click)="goto(notification.id)">
+                <p>{{notification.message}}</p>
+                <span class="notification-time"
+                  >{{notification.notificationTime}}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="notification-footer">
+            <a href="#">See All Notifications</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="user-btn dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle user-icon"></i>
+            <span class="user-name">{{ userName }}</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+              <a class="dropdown-item" [routerLink]="['/client-profile']">
+                <i class="bi bi-person"></i> Profile
+              </a>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li>
+              <a class="dropdown-item logout-item" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      } @else {
+      <div class="auth-buttons d-none d-lg-flex">
+        <a class="btn login-btn" [routerLink]="['/login']">Login</a>
+        <a class="btn signup-btn" [routerLink]="['/signup']">Get Started</a>
+      </div>
+
+      <div class="mobile-auth-buttons d-lg-none">
+        <a class="btn login-btn" [routerLink]="['/login']">Login</a>
+        <a class="btn signup-btn" [routerLink]="['/signup']">Get Started</a>
+      </div>
+      }
+    </div>
+      
+  </div>
+</nav>

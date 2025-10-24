@@ -1,0 +1,80 @@
+<div class="therapy-sessions-container">
+  <div class="content-header">
+    <h2 class="page-title">Incoming Sessions</h2>
+  </div>
+  @if(incomingSessions.length == 0) {
+  <div class="no-sessions-message">
+    <div class="empty-state">
+      <i class="bi bi-calendar-x"></i>
+      <h3>No Incoming Sessions</h3>
+      <p>You don't have any sessions at this time.</p>
+    </div>
+  </div>
+  } @else {
+  <div class="sessions-grid">
+    @for (session of incomingSessions; track session.sessionId) {
+    <div class="session-card">
+      <div class="session-details">
+        <div class="detail-item">
+          <i class="bi bi-person-circle"></i>
+          <div>
+            <span class="detail-label">Patient</span>
+            <span class="detail-value">{{session.patientName}}</span>
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <i class="bi bi-calendar3"></i>
+          <div>
+            <span class="detail-label">Date</span>
+            <span class="detail-value"
+              >{{ formatDateOnly(session.startDateTime) }}</span
+            >
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <i class="bi bi-clock"></i>
+          <div>
+            <span class="detail-label">Time</span>
+            <span class="detail-value"
+              >{{ formatTimeOnly(session.startDateTime) }}</span
+            >
+          </div>
+        </div>
+
+        <div class="detail-item">
+          <i class="bi bi-stopwatch"></i>
+          <div>
+            <span class="detail-label">Duration</span>
+            <span class="detail-value"
+              >{{formatDuration(session.duration)}}</span
+            >
+          </div>
+        </div>
+      </div>
+
+ <div class="session-actions">
+  @if (isSessionJoinable(session)) {
+    <a [routerLink]="'/meeting/' + session.sessionId" class="start-session-btn">
+      <i class="bi bi-camera-video"></i>
+      <span>Join Session</span>
+    </a>
+  } @else if (isSessionMissed(session)) {
+    <button class="start-session-btn missed" disabled>
+      <i class="bi bi-x-circle"></i>
+      <span>Session Missed</span>
+    </button>
+  } @else {
+    <button class=" not-started disabled" disabled>
+      <i class="bi bi-camera-video"></i>
+      <span>Join Available At Session Time</span>
+    </button>
+  }
+</div>
+
+    </div>
+    }
+  </div>
+  }
+</div>

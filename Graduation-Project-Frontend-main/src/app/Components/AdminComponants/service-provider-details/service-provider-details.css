@@ -1,0 +1,152 @@
+
+.container-fluid {
+  background-color: #fff;
+  min-height: 100vh;
+}
+.profile-header {
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.profile-header img {
+  border-color: #28a745 !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-header h1 {
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.position-relative .badge {
+  font-size: 0.8rem;
+  padding: 0.5em 0.75em;
+  box-shadow: 0 0 0 2px white;
+}
+
+.card {
+  border: none;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* List group items */
+.list-group-item {
+  padding: 1rem 1.25rem;
+  border-color: rgba(0, 0, 0, 0.03);
+}
+
+.list-group-item:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+/* Certificate cards */
+.certificate-item .card {
+  overflow: hidden;
+}
+
+.certificate-item .card-img-top {
+  transition: transform 0.3s ease;
+}
+
+.certificate-item:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.certificate-item .card-title {
+  color: #343a40;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Verification documents */
+.document-image {
+  max-height: 400px;
+  object-fit: contain;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.document-item:hover .document-image {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+/* Action buttons */
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-lg {
+  min-width: 200px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .profile-header img {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .btn-lg {
+    width: 100%;
+  }
+}
+
+/* Animation for status badge */
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.05); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.bg-warning {
+  animation: pulse 2s infinite;
+}
+
+/* Text styling */
+.text-muted {
+  line-height: 1.6;
+}
+
+/* Section spacing */
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Badge styling */
+.badge {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}

@@ -1,0 +1,156 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+@if (errorMessage) {
+  <div class="error-message text-start">{{ errorMessage }}</div>
+}
+<div class="form-field file-upload">
+  <!-- <label>User Image</label>
+  <div class="file-input-wrapper">
+    <input type="file" (change)="onFileChange($event)" id="userImage" accept="image/*" />
+    <label for="userImage" class="file-input-label">
+      <i class="upload-icon">upload</i>
+      <span>Choose profile photo</span>
+    </label>
+  </div> -->
+
+  @if (userImagePreview) {
+    <div class="preview">
+      <img [src]="userImagePreview" class="preview-img" alt="User Image Preview" />
+      <button type="button" class="remove-image-btn" (click)="removeImage()">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+  }
+</div>
+
+  <div class="form-group name-group">
+    <div class="form-field">
+      <label for="firstName">First Name</label>
+      <input id="firstName" type="text" formControlName="firstName" placeholder="Rahma" />
+      @if (signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched) {
+        <div class="error-message text-start">First name is required</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="lastName">Last Name</label>
+      <input id="lastName" type="text" formControlName="lastName" placeholder="Fatthy" />
+      @if (signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched) {
+        <div class="error-message text-start">Last name is required</div>
+      }
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="email">Email Address</label>
+    <input id="email" type="email" formControlName="email" placeholder="rahma@example.com" />
+    @if (signupForm.get('email')?.invalid && signupForm.get('email')?.touched) {
+      <div class="error-message text-start">Please enter a valid email address</div>
+    }
+  </div>
+
+  <div class="form-field">
+    <label for="phone">Phone Number</label>
+    <input id="phone" type="tel" formControlName="phone" placeholder="01012345678" />
+    @if (signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched) {
+      <div class="error-message text-start">Phone number is required</div>
+    }
+  </div>
+
+  <div class="form-field d-flex flex-row gap-3">
+    <div class="form-field">
+      <label for="password">Password</label>
+      <div class="password-input">
+        <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Create password" />
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility('password')">
+          <span [innerHTML]="showPassword ? eyeFillIcon : eyeIcon"></span>
+        </button>
+      </div>
+      @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+        <div class="error-message text-start">Password must be at least 8 characters</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="confirmPassword">Confirm Password</label>
+      <div class="password-input">
+        <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Confirm password" />
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility('confirmPassword')">
+          <span [innerHTML]="showConfirmPassword ? eyeFillIcon : eyeIcon"></span>
+        </button>
+      </div>
+      @if (signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched) {
+        <div class="error-message text-start">Please confirm your password</div>
+      }
+      @if (signupForm.get('password')?.value && signupForm.get('confirmPassword')?.value && signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value) {
+        <div class="error-message text-start">Passwords do not match</div>
+      }
+    </div>
+  </div>
+
+  <div class="form-group d-flex flex-row gap-3">
+    <div class="form-field">
+      <label for="username">Username</label>
+      <input id="username" type="text" formControlName="username" placeholder="Rahma‑Fatthy" />
+      @if (signupForm.get('username')?.invalid && signupForm.get('username')?.touched) {
+        <div class="error-message text-start">Username is required</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="dob">Date of Birth</label>
+      <input id="dob" type="date" formControlName="dob" />
+      @if (signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched) {
+        <div class="error-message text-start">Date of birth is required</div>
+      }
+    </div>
+  </div>
+<div class="form-group d-flex flex-row gap-3">
+  <div class="form-field">
+    <label for="address">Address</label>
+    <input id="address" type="text" formControlName="address" placeholder="Street, City, Country" />
+    @if (signupForm.get('address')?.invalid && signupForm.get('address')?.touched) {
+      <div class="error-message text-start">Address is required</div>
+    }
+  </div>
+  <div class="form-field">
+  <label for="gender">Gender</label>
+  <select id="gender" formControlName="gender">
+  <option value="" disabled selected>Select your gender</option>
+    <option [value]="0">Male</option>
+    <option [value]="1">Female</option>
+  </select>
+  @if (signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched) {
+    <div class="error-message">Gender is required</div>
+  }
+</div>
+</div>
+
+
+  <div class="form-field">
+    <label for="illness">Your Condition / Illness</label>
+    <textarea id="illness" formControlName="illness" rows="4" placeholder="Describe your mental health condition..."></textarea>
+    @if (signupForm.get('illness')?.invalid && signupForm.get('illness')?.touched) {
+      <div class="error-message text-start">Illness is required</div>
+    }
+  </div>
+
+  <div class="divider"></div>
+  <div class="welcome-message">
+    <h3>Welcome to MindConnect!</h3>
+    <p>As a client, you'll have access to our network of licensed mental health professionals. After creating your account, you can browse providers, book sessions, and start your journey to better mental health.</p>
+  </div>
+
+  <div class="form-field checkbox-field d-flex align-items-center">
+    <input id="agreeToTerms" type="checkbox" formControlName="agreeToTerms" />
+    <label for="agreeToTerms">I agree to the Terms of Service and Privacy Policy</label>
+    @if (signupForm.get('agreeToTerms')?.invalid && signupForm.get('agreeToTerms')?.touched) {
+      <div class="error-message">You must agree to the terms</div>
+    }
+  </div>
+
+  <button type="submit" class="submit-button" [disabled]="signupForm.invalid">
+    Create Account
+  </button>
+
+
+</form>

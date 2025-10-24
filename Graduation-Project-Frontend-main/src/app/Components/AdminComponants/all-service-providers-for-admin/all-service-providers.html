@@ -1,0 +1,57 @@
+<div class="admin-dashboard-container">
+  <main class="main-content-container">
+    <div class="content-header">
+      <h2 class="page-title">All Service Providers</h2>
+    </div>
+
+    <div class="content-card">
+      <div class="table-container rounded-5 shadow-sm">
+        <table class="service-providers-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Clinic Location</th>
+              <th>Specialization</th>
+              <th>Address</th>
+              <th>Experience</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(sp of serviceProviders; track sp.id) {
+              <tr>
+                <td data-label="Name">{{sp.firstName}} {{sp.lastName}}</td>
+                <td data-label="Clinic Location">{{sp.clinicLocation}}</td>
+                <td data-label="Specialization">{{sp.specialization}}</td>
+                <td data-label="Address">{{sp.address}}</td>
+                <td data-label="Experience">{{sp.experience}}</td>
+                <td data-label="Actions" class="d-flex gap-2">
+                  <button class="action-btn view-btn" (click)="goToDetails(sp.id)" title="Details">
+                    <i class="bi bi-eye-fill"></i> <span class="btn-text">Details</span>
+                  </button>
+                  <button class="action-btn edit-btn" (click)="goToUpdate(sp.id)" title="Update">
+                    <i class="bi bi-pencil-square"></i> <span class="btn-text">Update</span>
+                  </button>
+                  <button class="action-btn delete-btn" (click)="deleteServiceProvider(sp.id)" title="Delete">
+                    <i class="bi bi-trash"></i> <span class="btn-text">Delete</span>
+                  </button>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr class="empty-row">
+                <td colspan="6">
+                  <div class="empty-state">
+                    <i class="bi bi-people empty-icon"></i>
+                    <p>No service providers found</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+

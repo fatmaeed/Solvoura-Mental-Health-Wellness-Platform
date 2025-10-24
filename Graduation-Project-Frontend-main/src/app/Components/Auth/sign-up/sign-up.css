@@ -1,0 +1,157 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #d3deef, #ece3f9);
+}
+.back-home-container {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+}
+
+.back-home-button {
+  color: #6c757d;
+  font-size: 1.2rem;
+  text-decoration: none;
+  background: none;
+  border: none;
+  transition: color 0.3s ease;
+}
+
+.back-home-button:hover {
+  color: #558edb;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-title {
+  font-size: 20px;
+  margin-bottom: 4px;
+  color: #6c757d;
+  font-weight: 700;
+}
+
+.welcome-subtitle {
+  font-size: 1rem;
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+.logo-img {
+  height: 3.5rem;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #000;
+}
+
+
+.header {
+  max-width: 700px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.signup-card {
+  background-color: #fff;
+  min-width: 60rem;
+  max-width: 60rem;
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .signup-card {
+    min-width: 90%;
+    max-width: 90%;
+  }
+}
+
+.logo-title {
+  font-weight: 700;
+  font-size: 24px;
+  color: #558edb;
+}
+
+.welcome-title {
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.welcome-subtitle {
+  font-size: 14px;
+  color: #6c757d;
+  margin-top: 8px;
+}
+
+.divider {
+  height: 1px;
+  background-color: #ccc;
+  margin: 16px 0;
+}
+
+.form-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #6c757d;
+}
+.account-type-toggle {
+  padding: 0.3rem;
+  background-color: #e6ede6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0.3rem 0.3rem;
+  font-weight: 600;
+  color: #6c757d;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  /* border-right: 1px solid #9ad2cd; */
+}
+
+.toggle-btn:last-child {
+  border-right: none;
+}
+
+.toggle-btn.active {
+  border-radius: 8px;
+  /* margin: 0.1rem; */
+  background-color: white;
+  color: #000;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #7f8c8d;
+}
+
+.login-link-text {
+  color: #558edb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link-text:hover {
+  text-decoration: underline;
+}

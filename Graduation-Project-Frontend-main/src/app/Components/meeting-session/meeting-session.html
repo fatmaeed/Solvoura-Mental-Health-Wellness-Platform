@@ -1,0 +1,171 @@
+@if(!sessionModel) {
+<app-loading></app-loading>
+} @else {
+<div class="meeting-container">
+  <div class="main-content">
+    <!-- Left side - Video feeds -->
+    <div class="video-section">
+      <div class="video-container">
+        <!-- Remote video (doctor/client) -->
+        <div class="remote-video-wrapper" [class.hidden]="!isCallStarted">
+          <video
+            #remoteVideo
+            autoplay
+            playsinline
+            (ended)="onRemoteVideoEnded()"
+          ></video>
+          @if (!isRemoteVideoActive) {
+          <div class="no-video-placeholder bg-dark">
+            <i class="bi bi-person-circle profile-icon"></i>
+          </div>
+          }
+
+          <div class="participant-info" *ngIf="participants.length > 0">
+            {{ participants.join(' and ') }}
+          </div>
+          @if(isCallStarted) {
+          <div class="call-timer">
+            <i class="bi bi-clock"></i> {{ elapsedTime }}
+          </div>
+          }
+        </div>
+
+        <!-- Local video -->
+        <div class="local-video-wrapper">
+          <video #localVideo autoplay playsinline muted></video>
+          <div class="user-info">You</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side - Session info (hidden during call) -->
+    @if(!isCallStarted) {
+    <div class="info-section">
+      <div class="session-card">
+        <h3>Session Details</h3>
+
+        <div class="info-row">
+          <span class="label">Duration:</span>
+          <span class="value">{{ sessionModel.duration }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Date:</span>
+          <span class="value">
+            {{ sessionModel.startDateTime | date: 'yyyy-MM-dd' }} - {{
+            sessionModel.endDateTime | date: 'yyyy-MM-dd' }}
+          </span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Doctor:</span>
+          <span class="value">{{ sessionModel.doctorName }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Patient:</span>
+          <span class="value">{{ sessionModel.patientName }}</span>
+        </div>
+
+        <div class="info-row">
+          <span class="label">Status:</span>
+          <span
+            class="value"
+            [ngClass]="{
+                'status-active': isCallStarted,
+                'status-pending': !isCallStarted
+              }"
+          >
+            {{ isCallStarted ? 'In Progress' : 'Not Started' }}
+          </span>
+        </div>
+
+        <!-- Controls -->
+        <div class="controls-container">
+          <div class="call-controls">
+            <button (click)="toggleMute()" [class.active]="isMuted">
+              @if(isMuted){
+              <i class="bi bi-mic-mute-fill"></i>
+              } @else {
+              <i class="bi bi-mic-fill"></i>
+              }
+            </button>
+            <button (click)="toggleVideo()" [class.active]="isVideoOff">
+              @if(isVideoOff){
+              <i class="bi bi-camera-video-off-fill"></i>
+              } @else {
+              <i class="bi bi-camera-video-fill"></i>
+              }
+            </button>
+            @if(isCallStarted || isConnecting){
+            <button
+              title="End session"
+              (click)="endCall()"
+              class="btn-end"
+              matTooltip="End session"
+            >
+              <i class="bi bi-telephone-fill"></i>
+            </button>
+            }
+          </div>
+          @if(!isCallStarted && !isConnecting){ @if(role == 'CLIENT'){
+          <button
+            (click)="joinRoomFunction()"
+            class="btn-start"
+            [disabled]="!isSessionStarted"
+          >
+            {{ isSessionStarted ? 'Join Session' : 'Wait for Doctor' }}
+          </button>
+          }@else if (role == 'SERVICEPROVIDER') { @if(isSessionStarted){
+          <button (click)="startCall()" class="btn-start">Start Session</button>
+
+          }@else {
+          <app-loading></app-loading>
+          } } }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Connection status messages -->
+  @if(isConnecting && !connectionError){
+  <div class="connection-status">
+    <div class="spinner"></div>
+    <p>Waiting Client to join...</p>
+  </div>
+  } @if(connectionError){
+  <div class="error-message">{{ connectionError }}</div>
+  }
+
+  <!-- In-call controls (shown during call) -->
+  @if(isCallStarted) {
+  <div class="in-call-controls">
+    <button (click)="toggleMute()" [class.active]="isMuted">
+      @if(isMuted){
+      <i class="bi bi-mic-mute-fill"></i>
+      } @else {
+      <i class="bi bi-mic-fill"></i>
+      }
+    </button>
+    <button (click)="toggleVideo()" [class.active]="isVideoOff">
+      @if(isVideoOff){
+      <i class="bi bi-camera-video-off-fill"></i>
+      } @else {
+      <i class="bi bi-camera-video-fill"></i>
+      }
+    </button>
+    <button
+      title="screen share"
+      (click)="toggleScreenShare()"
+      [class.active]="isScreenSharing"
+    >
+      <i class="bi bi-display"></i>
+    </button>
+    <button title="end call" (click)="endCall()" class="btn-end">
+      <i class="bi bi-telephone-fill"></i>
+    </button>
+  </div>
+  }
+</div>
+}

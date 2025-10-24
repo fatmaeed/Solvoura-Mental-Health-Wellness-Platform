@@ -1,0 +1,128 @@
+<div class="login-container">
+  <div class="login-card position-relative">
+    <div class="back-home-container">
+      <a
+        (click)="goToHome()"
+        class="back-home-button"
+        aria-label="Back to Home"
+      >
+        <i class="bi bi-x-lg"></i>
+      </a>
+    </div>
+    <div class="logo-section">
+      <img
+        src="assets/images/logo3.png"
+        class="logo-img"
+        alt="MindConnect Logo"
+      />
+      <h1 class="logo-text">Solvoura</h1>
+    </div>
+ 
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="auth-form">
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="userNameOrEmail"
+          placeholder="Enter your email"
+          class="form-input"
+          [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+        />
+        @if (loginForm.get('email')?.invalid && loginForm.get('email')?.touched)
+        {
+        <div class="validation-error">Please enter a valid email address</div>
+        }
+      </div>
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <div class="password-field">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            placeholder="Enter your password"
+            class="form-input"
+            [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="showPassword = !showPassword"
+            [attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+          >
+                     <span [innerHTML]="showPassword ? eyeFillIcon : eyeIcon"></span>
+
+          </button>
+        </div>
+        @if (loginForm.get('password')?.invalid &&
+        loginForm.get('password')?.touched) {
+        <div class="validation-error">
+          Password must be at least 8 characters
+        </div>
+        }
+      </div>
+      <div class="form-options">
+        <label class="remember-me">
+          <input
+            type="checkbox"
+            formControlName="rememberMe"
+            class="checkbox"
+          />
+          Remember me
+        </label>
+        <a href="/forgot-password" class="forgot-password">Forgot password?</a>
+      </div>
+
+      <button
+        type="submit"
+        class="submit-button"
+        [disabled]="loginForm.invalid"
+      >
+        @if (!isLoading) {
+        <span>Sign In</span>
+        } @else {
+        <div class="spinner"></div>
+        }
+      </button>
+      @if(isServerErrors) {
+      <div class="error-message text-start m-2 text-danger">
+        <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
+      </div>
+      }
+    </form>
+    <!-- <div class="social-divider">
+      <span class="divider-line"></span>
+      <span class="divider-text">OR CONTINUE WITH</span>
+      <span class="divider-line"></span>
+    </div>
+    <div class="oauth-buttons">
+      <button
+        type="button"
+        class="oauth-button google"
+        (click)="signInWithGoogle()"
+      >
+        <img src="assets/icons/google.png" alt="Google" class="oauth-icon" />
+        Google
+      </button>
+      <button
+        type="button"
+        class="oauth-button apple"
+        (click)="signInWithApple()"
+      >
+        <img src="assets/icons/apple.png" alt="Apple" class="oauth-icon" />
+        Apple
+      </button>
+    </div> -->
+    <p class="signup-link">
+      Don't have an account?
+      <a href="/signup" class="signup-button">Sign up</a>
+    </p>
+
+    <p class="legal-text">
+      By signing in, you agree to our
+      <a href="#" class="legal-link">Terms of Service</a> and
+      <a href="#" class="legal-link">Privacy Policy</a>
+    </p>
+  </div>
+</div>

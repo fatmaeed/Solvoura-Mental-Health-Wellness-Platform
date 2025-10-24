@@ -1,0 +1,35 @@
+<div class="notification-card">
+  <div class="notification-icon">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="48"
+      height="48"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="#558edb"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path
+        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+      ></path>
+      <polyline points="22,6 12,13 2,6"></polyline>
+    </svg>
+  </div>
+
+  <h3 class="notification-title">Confirmation Email Sent</h3>
+
+  <p class="notification-message">{{ message }}</p>
+
+  @if(emailAddress){
+  <div class="notification-email">
+    Sent to: <strong>{{ emailAddress }}</strong>
+  </div>
+  }
+
+  <div class="notification-help">
+    You entered the wrong email address?
+    <a href="/signup" class="resend-link">back now</a>.
+  </div>
+</div>

@@ -1,0 +1,52 @@
+.booking-therapy-container {
+  max-width: 1200px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.find-sessions-button:hover {
+  background-color: #5a8fc7 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(105, 155, 191, 0.3);
+}
+
+.confirm-button:hover {
+  background-color: #e4f0e9 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(92, 184, 92, 0.3);
+}
+
+.time-slot-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(105, 155, 191, 0.15);
+}
+
+.time-slot-card.selected {
+  border-color: #699bbf !important;
+  background-color: rgba(105, 155, 191, 0.05);
+}
+
+/* Form Elements */
+.form-select:focus, .form-control:focus {
+  border-color: #699bbf !important;
+  box-shadow: 0 0 0 0.2rem rgba(105, 155, 191, 0.25) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .doctor-image-wrapper {
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .booking-title {
+    font-size: 1.8rem !important;
+  }
+
+  .booking-subtitle {
+    font-size: 1rem !important;
+  }
+
+  .time-slots-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

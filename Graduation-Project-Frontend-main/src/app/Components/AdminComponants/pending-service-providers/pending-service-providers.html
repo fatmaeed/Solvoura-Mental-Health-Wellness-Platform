@@ -1,0 +1,51 @@
+<div class="admin-dashboard-container">
+
+  <main class="main-content-container">
+    <div class="content-header">
+      <h2 class="page-title">Pending Service Providers</h2>
+    </div>
+
+    <div class="content-card">
+      <div class="table-container rounded-5 shadow-sm">
+        <table class="service-providers-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Clinic Location</th>
+              <th>Specialization</th>
+              <th>Address</th>
+              <th>Experience</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(sp of pendingServiceProviders; track sp.id) {
+              <tr>
+                <td data-label="Name">{{sp.firstName}} {{sp.lastName}}</td>
+                <td data-label="Clinic Location">{{sp.clinicLocation}}</td>
+                <td data-label="Specialization">{{sp.specialization}}</td>
+                <td data-label="Address">{{sp.address}}</td>
+                <td data-label="Experience">{{sp.experience}}</td>
+                <td data-label="Actions">
+                  <button class="details-btn" (click)="getServiceProviderById(sp.id)">
+                    <i class="bi bi-eye-fill"></i> Details
+                  </button>
+                </td>
+              </tr>
+            }
+            @empty {
+              <tr class="empty-row">
+                <td colspan="6">
+                  <div class="empty-state">
+                    <i class="bi bi-people empty-icon"></i>
+                    <p>No pending service providers found</p>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>

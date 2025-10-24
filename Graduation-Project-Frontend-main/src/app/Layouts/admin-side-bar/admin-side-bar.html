@@ -1,0 +1,60 @@
+<div class="admin-container">
+  <nav class="doctor-sidebar">
+    <div class="sidebar-header">
+      <div class="avatar-container">
+        @if(adminImage) {
+          <img [src]="adminImage" alt="Admin" class="doctor-avatar">
+        } @else {
+          <div class="avatar-initials">{{ getInitials(adminName!) }}</div>
+        }
+      </div>
+      <h3 class="doctor-name">{{ adminName }}</h3>
+    </div>
+
+    <ul class="sidebar-menu">
+
+      <li class="menu-item" [class.active]="activeTab == 'pending-service-providers'">
+        <a class="menu-link" [routerLink]="['/admin-dashboard/pending-service-providers']">
+          <span class="menu-icon">👤</span>
+          <span class="menu-text">Pending Service Providers</span>
+        </a>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'service-providers'">
+        <a class="menu-link" [routerLink]="['/admin-dashboard/all-service-providers-for-admin']">
+          <span class="menu-icon">👨‍⚕️</span>
+          <span class="menu-text">Service Providers</span>
+        </a>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'clients'">
+        <a class="menu-link" [routerLink]="['/admin-dashboard/all-clients']">
+          <span class="menu-icon">👤</span>
+          <span class="menu-text">Clients</span>
+        </a>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'our-services'">
+        <a class="menu-link" [routerLink]="['/admin-dashboard/all-our-services']">
+          <span class="menu-icon">💊</span>
+          <span class="menu-text">Our Services</span>
+        </a>
+      </li>
+      <li class="menu-item" [class.active]="activeTab === 'community'">
+        <a class="menu-link" [routerLink]="['/community']">
+          <span class="menu-icon">💬</span>
+          <span class="menu-text">Community</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="logout()">
+        <span class="logout-icon">🚪</span>
+        <span class="logout-text">Log Out</span>
+      </button>
+    </div>
+  </nav>
+
+  <main class="admin-content content-area">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+

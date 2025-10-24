@@ -1,0 +1,30 @@
+.feature-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.icon-box {
+  width: 64px;
+  height: 64px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  i {
+    font-size: 1.5rem;
+    color: #719dc9;
+    transition: transform 0.4s ease;
+  }
+}
+
+.feature-card:hover .icon-box {
+  transform: translateY(-6px) scale(1.1) rotate(5deg);
+  box-shadow: 0 12px 24px rgba(113, 157, 201, 0.2);
+}
+
+.feature-card:hover .icon-box i {
+  transform: scale(1.2) rotate(-5deg);
+}

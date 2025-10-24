@@ -1,0 +1,77 @@
+<div class="floating-btn-container">
+  <button class="floating-btn pulse-notification"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#chatbotOffcanvas"
+          aria-controls="chatbotOffcanvas">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+    </svg>
+  </button>
+</div>
+
+<div class="offcanvas offcanvas-end chatbot-panel" tabindex="-1" id="chatbotOffcanvas">
+  <div class="offcanvas-header border-bottom">
+    <div class="chatbot-header">
+      <div class="avatar-wrapper">
+        <div class="avatar">
+          <img src="assets/images/logo.png" width="50" height="50" fill="currentColor"  class="p-2" viewBox="0 0 24 24">
+        </div>
+      </div>
+      <div class="header-text">
+        <h5 class="mb-0">Solvoura AI Assistant</h5>
+      
+      </div>
+    </div>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+
+  <div class="offcanvas-body">
+    <div class="chat-messages">
+      <div class="message-wrapper ai">
+        <div class="message-content-wrapper">
+          <div class="message-bubble ai">
+            <div class="message-content">Hi there! 👋 How can I help you today?</div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let msg of messages">
+        <div class="message-wrapper {{ msg.sender }}">
+          <div class="message-content-wrapper">
+            <div class="message-bubble {{ msg.sender }}">
+              <div class="message-content">{{ msg.content }}</div>
+              <div class="message-time">{{ msg.timestamp | date:'shortTime' }}</div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <div *ngIf="isLoading" class="message-wrapper ai">
+        <div class="message-content-wrapper">
+          <div class="message-bubble ai">
+            <div class="typing-indicator">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-input-container">
+      <div class="input-group">
+        <input [(ngModel)]="prompt"
+               (keyup.enter)="sendPrompt()"
+               type="text"
+               class="form-control"
+               placeholder="Type your question..." />
+        <button class="btn btn-send" type="button" (click)="sendPrompt()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.bg-light-green {
+  background: #e3efe8;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  feature-card:hover .icon-box {
+    transform: translateY(-4px);
+    transition: transform 0.25s;
+  }
+}

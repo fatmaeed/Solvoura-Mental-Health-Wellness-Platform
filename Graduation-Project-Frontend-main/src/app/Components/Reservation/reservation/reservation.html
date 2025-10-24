@@ -1,0 +1,238 @@
+<app-nav-bar></app-nav-bar>
+
+<div class="booking-therapy-container container py-4">
+  <div class="doctor-card card border-0 p-4 mb-4" style="background-color: #699bbf; border-radius: 15px;">
+    <div class="booking-header text-center mb-4">
+      <h1 class="booking-title display-5 fw-bold mb-3" style="color: #fff;">Book Your Therapy Session</h1>
+      <p class="booking-subtitle lead mb-0" style="color: #fff;">Begin your journey to wellness with  {{provider.firstName}}</p>
+    </div>
+
+    <div class="row align-items-center g-4">
+      <div class="col-md-3 text-center">
+        <div class="doctor-image-wrapper position-relative mx-auto" style="width: 160px; height: 160px;">
+          <img [src]="apiurl + provider.userImagePath" alt="Doctor"
+               class="doctor-profile-image rounded-circle img-fluid shadow"
+               style="width: 100%; height: 100%; object-fit: cover; border: 4px solid white;">
+          <div class="doctor-verification-badge position-absolute bg-white rounded-circle d-flex align-items-center justify-content-center shadow"
+               style="width: 36px; height: 36px; bottom: 10px; right: 10px;">
+            <i class="bi bi-patch-check-fill" style="color: #699bbf; font-size: 1.2rem;"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <div class="doctor-details ps-md-4">
+          <div class="doctor-name-specialty mb-3">
+            <h2 class="h3 my-3 fw-bold" style="color: #fff;">{{provider.firstName}} {{provider.lastName}}</h2>
+            <span class="badge rounded-pill py-2 px-3" style="background-color: #d4e6f1; color: #3a6a8c; font-weight: 500;">
+              {{provider.specialization}}
+            </span>
+          </div>
+
+          <div class="doctor-info-grid row g-3 mt-3">
+            <div class="info-item col-md-6 d-flex align-items-center">
+              <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center me-3"
+                   style="width: 40px; height: 40px; background-color: #f8fafd;">
+                <i class="bi bi-geo-alt-fill" style="color: #ff7b7b; font-size: 1.1rem;"></i>
+              </div>
+              <span style="color: #fff; font-weight: 500;">{{provider.clinicLocation}}</span>
+            </div>
+
+            <div class="info-item col-md-6 d-flex align-items-center">
+              <div class="icon-wrapper rounded-circle shadow-sm d-flex align-items-center justify-content-center me-3"
+                   style="width: 40px; height: 40px; background-color: #f8fafd;">
+                <i class="bi bi-cash-stack" style="color: #5cb85c; font-size: 1.1rem;"></i>
+              </div>
+              <span style="color: #fff; font-weight: 500;">{{provider.pricePerHour}} EGP/hour</span>
+            </div>
+
+            <div class="info-item col-md-6 d-flex align-items-center">
+              <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center me-3"
+                   style="width: 40px; height: 40px; background-color:#f8fafd;">
+                <i class="bi bi-award-fill" style="color: #ffc107; font-size: 1.1rem;"></i>
+              </div>
+              <span style="color:  #fff; font-weight: 500;">{{provider.numberOfExp}}+ years experience</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Form Section -->
+  <div class="booking-form-section card border-0 p-4 mb-4" style="background-color: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(105, 155, 191, 0.1);">
+    <h3 class="section-title h4 mb-4 d-flex align-items-center">
+      <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center me-3"
+           style="width: 40px; height: 40px; background-color: rgba(105, 155, 191, 0.1);">
+        <i class="bi bi-calendar2-week" style="color: #699bbf; font-size: 1.2rem;"></i>
+      </div>
+      <span style="color: #2d4a61; font-weight: 600;">Select Session Details</span>
+    </h3>
+
+    <div class="booking-form-grid row g-3">
+      <div class="form-group col-md-6">
+        <label class="form-label mb-2" style="color: #5a6a7d; font-weight: 500;">Session Type</label>
+        <div class="select-wrapper position-relative">
+          <select class="form-select ps-4 py-2" style="border-radius: 10px; border-color: #d1e3f6; height: 48px;"
+                  (change)="onSessionTypeChange($event)">
+            <option selected disabled>Choose session type</option>
+            <option value="Online">Online Video Session</option>
+            <option value="Offline">In-Clinic Visit</option>
+            <option value="Both">Flexible (Online or Clinic)</option>
+          </select>
+          <i class="bi bi-chevron-down position-absolute" style="top: 50%; right: 15px; transform: translateY(-50%); color: #699bbf;"></i>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="form-label mb-2" style="color: #5a6a7d; font-weight: 500;">Start Date</label>
+        <div class="date-input-wrapper position-relative">
+          <input type="date" class="form-control ps-5 py-2" style="border-radius: 10px; border-color: #d1e3f6; height: 48px;"
+                 [(ngModel)]="startDate" />
+          <i class="bi bi-calendar3 position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #699bbf;"></i>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="form-label mb-2" style="color: #5a6a7d; font-weight: 500;">End Date</label>
+        <div class="date-input-wrapper position-relative">
+          <input type="date" class="form-control ps-5 py-2" style="border-radius: 10px; border-color: #d1e3f6; height: 48px;"
+                 [(ngModel)]="endDate" />
+          <i class="bi bi-calendar3 position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #699bbf;"></i>
+        </div>
+      </div>
+
+      <div class="form-group col-md-6">
+        <label class="form-label mb-2" style="color: #5a6a7d; font-weight: 500;">Duration (minutes)</label>
+        <div class="number-input-wrapper position-relative">
+          <input type="number" class="form-control ps-5 py-2" style="border-radius: 10px; border-color: #d1e3f6; height: 48px;"
+                 min="30" step="15" [(ngModel)]="durationInMinutes" />
+          <i class="bi bi-clock-history position-absolute" style="top: 50%; left: 15px; transform: translateY(-50%); color: #699bbf;"></i>
+        </div>
+      </div>
+    </div>
+
+    <button class="find-sessions-button btn w-100 mt-4 py-3 d-flex align-items-center justify-content-center"
+            (click)="FindSessions()"
+            style="background-color: #699bbf; color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s;">
+      <i class="bi bi-search me-2"></i>
+      <span>Find Available Sessions</span>
+    </button>
+  </div>
+
+  @if(showSessions) {
+  <div class="sessions-section card border-0 p-4 mb-4" style="background-color: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(105, 155, 191, 0.1);">
+    <div class="sections-header d-flex justify-content-between align-items-center mb-4">
+      <h3 class="h4 mb-0 d-flex align-items-center">
+        <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center me-3"
+             style="width: 40px; height: 40px; background-color: rgba(105, 155, 191, 0.1);">
+          <i class="bi bi-clock" style="color: #699bbf; font-size: 1.2rem;"></i>
+        </div>
+        <span style="color: #2d4a61; font-weight: 600;">Available Time Slots</span>
+      </h3>
+      <div class="selected-count-bubble badge rounded-pill py-2 px-3" style="background-color: #699bbf; color: white;">
+        {{selectedSessionIds.length}} selected
+      </div>
+    </div>
+
+    @if(freesessions.length > 0) {
+    <div class="time-slots-grid row g-3">
+      @for (item of freesessions; track item.id) {
+      <div class="col-md-6 col-lg-4">
+        <div class="time-slot-card card p-3 h-100"
+             [class.selected]="isSessionSelected(item.id)"
+             (click)="toggleSessionSelection(item.id)"
+             style="border-radius: 12px; border: 1px solid #e0e9f5; transition: all 0.3s; cursor: pointer;">
+          <div class="d-flex align-items-center">
+            <div class="session-type-indicator rounded-circle d-flex align-items-center justify-content-center me-3"
+                 style="width: 40px; height: 40px;"
+                 [style.backgroundColor]="item.type === 'Online' ? 'rgba(105, 155, 191, 0.1)' : 'rgba(92, 184, 92, 0.1)'">
+              <i class="bi fs-5"
+                 [class.bi-camera-video]="item.type === 'Online'"
+                 [class.bi-geo-alt]="item.type === 'Offline'"
+                 [style.color]="item.type === 'Online' ? '#699bbf' : '#5cb85c'"></i>
+            </div>
+
+            <div class="session-datetime flex-grow-1">
+              <div class="session-date fw-medium" style="color: #2d4a61;">{{ formatDate(item.startDateTime) }}</div>
+              <div class="session-time small" style="color: #7d9cc5;">
+                {{ formatTime(item.startDateTime) }}
+                <span class="duration">({{ formatDuration(item.duration) }})</span>
+              </div>
+            </div>
+
+            <div class="session-price fw-bold ms-2" style="color: #2d4a61;">
+              {{item.sessionPrice}} EGP
+            </div>
+
+            <div class="selection-checkbox ms-3">
+              <div class="checkbox border rounded d-flex align-items-center justify-content-center"
+                   [style.backgroundColor]="isSessionSelected(item.id) ? '#699bbf' : 'transparent'"
+                   [style.borderColor]="isSessionSelected(item.id) ? '#699bbf' : '#d1e3f6'"
+                   style="width: 22px; height: 22px; transition: all 0.2s;">
+                <i class="bi bi-check text-white" style="font-size: 0.8rem;"
+                   [style.opacity]="isSessionSelected(item.id) ? '1' : '0'"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <div class="confirm-section mt-4">
+      <button class="confirm-button btn w-100 py-3 d-flex align-items-center justify-content-center"
+              (click)="readyToPay()"
+              [disabled]="selectedSessionIds.length === 0"
+              style="background-color: #5cb85c; color: white; border: none; border-radius: 10px; font-weight: 500; transition: all 0.3s;">
+        <span>Confirm {{selectedSessionIds.length}} Session{{selectedSessionIds.length !== 1 ? 's' : ''}}</span>
+        <i class="bi bi-arrow-right ms-2"></i>
+      </button>
+    </div>
+    } @else {
+    <div class="no-slots-message text-center py-5">
+      <div class="icon-wrapper d-inline-flex align-items-center justify-content-center mb-3"
+           style="width: 60px; height: 60px; background-color: rgba(255, 107, 107, 0.1); border-radius: 50%;">
+        <i class="bi bi-calendar-x" style="color: #ff7b7b; font-size: 1.5rem;"></i>
+      </div>
+      <p class="text-muted mb-0">No available slots match your criteria</p>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Payment Section -->
+  @if(isReadyToPay) {
+  <div class="payment-section card border-0 p-4" style="background-color: white; border-radius: 15px; box-shadow: 0 5px 20px rgba(105, 155, 191, 0.1);">
+    <h3 class="section-title h4 mb-4 d-flex align-items-center">
+      <div class="icon-wrapper rounded-circle d-flex align-items-center justify-content-center me-3"
+           style="width: 40px; height: 40px; background-color: rgba(105, 155, 191, 0.1);">
+        <i class="bi bi-credit-card" style="color: #699bbf; font-size: 1.2rem;"></i>
+      </div>
+      <span style="color: #2d4a61; font-weight: 600;">Complete Your Booking</span>
+    </h3>
+
+    <div class="payment-summary rounded p-3 mb-4" style="background-color: #f8fafd; border: 1px solid #e0e9f5;">
+      <div class="summary-item d-flex justify-content-between py-2" style="border-bottom: 1px solid #e0e9f5;">
+        <span style="color: #5a6a7d;">Sessions:</span>
+        <span style="color: #2d4a61; font-weight: 500;">{{selectedSessionIds.length}}</span>
+      </div>
+      <div class="summary-item total d-flex justify-content-between py-2">
+        <span style="color: #2d4a61; font-weight: 600;">Total Amount:</span>
+        <span style="color: #2d4a61; font-weight: 600;">{{totalSessionsPrice}} EGP</span>
+      </div>
+    </div>
+
+    <app-paypal-button
+      [amount]="totalSessionsPrice"
+      [description]="'Therapy Sessions with Dr. ' + provider.firstName"
+      (dataEmitter)="recievePaid($event)">
+    </app-paypal-button>
+
+    <div class="secure-payment-note text-center small mt-4 d-flex align-items-center justify-content-center" style="color: #7d9cc5;">
+      <i class="bi bi-shield-lock me-2" style="color: #5cb85c;"></i>
+      <span>Secure SSL encrypted payment</span>
+    </div>
+  </div>
+  }
+</div>

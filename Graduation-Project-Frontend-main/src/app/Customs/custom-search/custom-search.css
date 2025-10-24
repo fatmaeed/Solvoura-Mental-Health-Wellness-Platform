@@ -1,0 +1,11 @@
+.custom-search-container {
+  margin-bottom: 1.5rem;
+}
+
+.input-group input:focus {
+  box-shadow: none;
+}
+.form-control::placeholder{
+  color: grey;
+  font-size: 0.75rem;
+}

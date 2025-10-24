@@ -1,0 +1,278 @@
+
+<div class="profile-update-container">
+  <div class="content-header">
+    <h2 class="page-title">Update Profile</h2>
+  </div>
+
+
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="profile-form">
+    @if (errorMessage) {
+    <div class="alert-message error">
+      <i class="bi bi-exclamation-triangle-fill"></i>
+      <span>{{ errorMessage }}</span>
+      <button class="alert-close" (click)="errorMessage = ''">&times;</button>
+    </div>
+    }
+
+    <!-- Personal Information -->
+    <div class="form-section">
+      <h3 class="section-title"><i class="bi bi-person-fill"></i> Personal Info</h3>
+
+      <div class="form-row">
+        <!-- First Name -->
+        <div class="form-group floating">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="firstName"
+            id="firstName"
+            placeholder=" "
+            [class.is-invalid]="updateForm.get('firstName')?.invalid && updateForm.get('firstName')?.touched"
+          />
+          <label for="firstName">First Name*</label>
+          <i class="bi bi-person input-icon"></i>
+          @if (updateForm.get('firstName')?.invalid && updateForm.get('firstName')?.touched) {
+          <div class="error-message">
+            <i class="bi bi-exclamation-circle"></i>
+            <span>First name is required</span>
+          </div>
+          }
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group floating">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            id="lastName"
+            placeholder=" "
+            [class.is-invalid]="updateForm.get('lastName')?.invalid && updateForm.get('lastName')?.touched"
+          />
+          <label for="lastName">Last Name*</label>
+          <i class="bi bi-person input-icon"></i>
+          @if (updateForm.get('lastName')?.invalid && updateForm.get('lastName')?.touched) {
+          <div class="error-message">
+            <i class="bi bi-exclamation-circle"></i>
+            <span>Last name is required</span>
+          </div>
+          }
+        </div>
+      </div>
+
+      <!-- Address -->
+      <div class="form-group floating full-width">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="address"
+          id="address"
+          placeholder=" "
+          [class.is-invalid]="updateForm.get('address')?.invalid && updateForm.get('address')?.touched"
+        />
+        <label for="address">Address*</label>
+        <i class="bi bi-geo-alt input-icon"></i>
+        @if (updateForm.get('address')?.invalid && updateForm.get('address')?.touched) {
+        <div class="error-message">
+          <i class="bi bi-exclamation-circle"></i>
+          <span>Address is required</span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Professional Information -->
+    <div class="form-section">
+      <h3 class="section-title"><i class="bi bi-briefcase-fill"></i> Professional Info</h3>
+
+      <div class="form-row">
+        <!-- Price Per Hour -->
+        <div class="form-group floating">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="pricePerHour"
+            id="pricePerHour"
+            placeholder=" "
+            min="0"
+          />
+          <label for="pricePerHour">Price Per Hour (EGP)</label>
+          <i class="bi bi-currency-dollar input-icon"></i>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-group floating">
+          <input
+            type="number"
+            class="form-control"
+            formControlName="experienceInYears"
+            id="experienceInYears"
+            placeholder=" "
+            min="0"
+          />
+          <label for="experienceInYears">Experience (Years)</label>
+          <i class="bi bi-award input-icon"></i>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <!-- Examination Type -->
+        <div class="form-group floating select-group">
+          <select class="form-control" formControlName="examinationType" id="examinationType">
+            <option value="" disabled selected></option>
+            <option value="0">Online</option>
+            <option value="1">Offline</option>
+            <option value="2">Both</option>
+          </select>
+          <label for="examinationType">Examination Type</label>
+          <i class="bi bi-laptop input-icon"></i>
+        </div>
+
+        <!-- Clinic Location -->
+        <div class="form-group floating">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="clinicLocation"
+            id="clinicLocation"
+            placeholder=" "
+          />
+          <label for="clinicLocation">Clinic Location (optional)</label>
+          <i class="bi bi-building input-icon"></i>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="form-group floating full-width textarea-group">
+        <textarea
+          class="form-control"
+          id="description"
+          placeholder=" "
+          formControlName="description"
+          [class.is-invalid]="updateForm.get('description')?.invalid && updateForm.get('description')?.touched"
+        ></textarea>
+        <label for="description">Description*</label>
+        <i class="bi bi-text-paragraph input-icon"></i>
+        @if (updateForm.get('description')?.invalid && updateForm.get('description')?.touched) {
+        <div class="error-message">
+          <i class="bi bi-exclamation-circle"></i>
+          <span>Minimum 10 characters</span>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Profile Image -->
+    <div class="form-section">
+      <h3 class="section-title">
+        <i class="bi bi-image"></i>
+        Profile Image
+      </h3>
+
+      <div class="file-upload-group">
+        <label class="file-upload-label">
+          <input type="file" (change)="onFileChange($event, 'userImage')" accept="image/*">
+          <div class="file-upload-content">
+            <i class="bi bi-cloud-arrow-up"></i>
+            <span>Upload Profile Photo</span>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- Certificates -->
+    <div class="form-section">
+      <h3 class="section-title"><i class="bi bi-file-earmark-medical-fill"></i> Certificates</h3>
+      <p class="section-subtitle">Add your professional qualifications</p>
+
+      <div formArrayName="certificates">
+        @for (cert of certificates.controls; track i; let i = $index) {
+        <div [formGroupName]="i" class="certificate-card">
+          <div class="form-row">
+            <!-- Certificate Name -->
+            <div class="form-group floating">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="certificateName"
+                id="certificateName{{i}}"
+                placeholder=" "
+              />
+              <label for="certificateName{{i}}">Certificate Name*</label>
+              <i class="bi bi-file-text input-icon"></i>
+            </div>
+
+            <!-- Issue Date -->
+            <div class="form-group floating">
+              <input
+                type="date"
+                class="form-control"
+                formControlName="issueDate"
+                id="issueDate{{i}}"
+                placeholder=" "
+              />
+              <label for="issueDate{{i}}">Issue Date*</label>
+              <i class="bi bi-calendar-date input-icon"></i>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <!-- Certificate Description -->
+            <div class="form-group floating">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="description"
+                id="certDescription{{i}}"
+                placeholder=" "
+              />
+              <label for="certDescription{{i}}">Description (optional)</label>
+              <i class="bi bi-card-text input-icon"></i>
+            </div>
+
+            <!-- Certificate File Upload -->
+            <div class="file-upload-group">
+              <label class="file-upload-label">
+                <input type="file" (change)="onCertificateFileChange($event, i)" accept="image/*">
+                <div class="file-upload-content">
+                  <i class="bi bi-cloud-arrow-up"></i>
+                  <span>Upload Certificate Image</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="file-upload small">
+            <label>
+              <i class="bi bi-paperclip"></i>
+              <span>Attach certificate</span>
+              <input type="file" (change)="onCertificateFileChange($event, i)" accept="image/*">
+            </label>
+          </div>
+        </div>
+        }
+      </div>
+
+      <button type="button" class="btn-add" (click)="addCertificate()">
+        <i class="bi bi-plus"></i> Add Certificate
+      </button>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-submit" [disabled]="updateForm.invalid">
+        <i class="bi bi-check-circle"></i> Save Changes
+      </button>
+    </div>
+  </form>
+
+  @if (showSuccessDialog) {
+  <div class="success-dialog">
+    <div class="dialog-content">
+      <i class="bi bi-check-circle-fill"></i>
+      <h3>Profile Updated!</h3>
+      <p>Your changes have been saved.</p>
+      <button class="btn-ok" (click)="showSuccessDialog = false">OK</button>
+    </div>
+  </div>
+  }
+</div>

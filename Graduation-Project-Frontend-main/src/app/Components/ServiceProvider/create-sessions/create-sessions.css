@@ -1,0 +1,248 @@
+.therapy-sessions-container {
+  max-width: 1400px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fff;
+}
+.therapy-sessions-container.wide-form {
+  max-width: 1600px;
+}
+.session-container {
+  width: 100%;
+  padding: 0 2rem;
+}
+
+.session-form-container {
+  width: 100%;
+  max-width: none;
+  padding: 2rem;
+}
+
+.session-form {
+  width: 100%;
+}
+
+.form-group {
+  width: 100%;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.session-form-container {
+  padding: 2rem;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+
+.form-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  padding: 2.5rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* Two-column layout */
+.form-columns {
+  display: flex;
+  gap: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-column {
+  flex: 1;
+  min-width: 0;
+}
+
+.full-width {
+  width: 100%;
+  max-width: none;
+}
+
+.content-header {
+  margin-bottom: 2rem;
+}
+
+.page-title {
+  text-align: start;
+  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+  margin-bottom: 4rem;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(to right, #6494c4, #8cc2a7);
+  border-radius: 3px;
+}
+
+.form-group {
+
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.detail-item i {
+  font-size: 1.4rem;
+  color: #86bdab;
+  margin-top: 0.5rem;
+  flex-shrink: 0;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #718096;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-control,
+.form-select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 0.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #2d3748;
+  background-color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #86bdab;
+  box-shadow: 0 0 0 3px rgba(134, 189, 171, 0.2);
+}
+
+.is-invalid {
+  border-color: #e53e3e;
+}
+
+.is-invalid:focus {
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.2);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e53e3e;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.error-message i {
+  color: #e53e3e;
+  font-size: 1rem;
+}
+
+.repeat-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-check-input {
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 0;
+}
+
+.form-check-label {
+  font-size: 0.9rem;
+  color: #2d3748;
+}
+
+.form-actions {
+  margin-top: 2rem;
+}
+
+.submit-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #86bdab;
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #76a898;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(134, 189, 171, 0.3);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .form-columns {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-card {
+    padding: 1.5rem;
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 768px) {
+  .therapy-sessions-container {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .detail-item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .detail-item i {
+    margin-top: 0;
+  }
+
+  .repeat-options {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}

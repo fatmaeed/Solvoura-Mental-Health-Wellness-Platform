@@ -1,0 +1,28 @@
+.btn-primary {
+  background-color: #8cc2a7;
+  border-color: #8cc2a7;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.btn-primary:hover {
+  background-color: seagreen;
+  border-color: seagreen;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(113, 157, 201, 0.2) !important;
+}
+
+.btn-outline-primary {
+  color: #fff;
+  border-color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: transparent;
+  color: #000;
+  border-color: #fff;
+}

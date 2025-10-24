@@ -1,0 +1,49 @@
+<div class="feedback-container">
+  <div class="feedback-header">
+    <h2>Share Your Experience</h2>
+    <div class="header-decoration"></div>
+  </div>
+
+  <div class="rating-section">
+    <p class="rating-prompt">How would you rate this experience?</p>
+    <div class="stars">
+      <span 
+        class="star" 
+        [class.filled]="i < rate" 
+        [class.hovered]="i < hoverRating"
+        *ngFor="let star of stars; index as i" 
+        (click)="setRating(i + 1)"
+        (mouseenter)="setHoverRating(i + 1)"
+        (mouseleave)="clearHoverRating()"
+      >
+        <svg width="32" height="32" viewBox="0 0 24 24">
+          <path [attr.fill]="i < rate ? '#FFD700' : '#D3D3D3'" 
+                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+      </span>
+    </div>
+  </div>
+
+  <div class="comment-section">
+    <label for="comment">Share your thoughts (optional)</label>
+    <textarea
+      id="comment"
+      [(ngModel)]="comment"
+      rows="4"
+      placeholder="What did you enjoy most? How could we improve?"
+    ></textarea>
+    <div class="character-count">{{comment.length}}/500</div>
+  </div>
+
+  <button class="submit-btn" (click)="submitFeedback()" [disabled]="rate === 0">
+    <span *ngIf="!isSubmitting">Submit Feedback</span>
+    <span *ngIf="isSubmitting" class="submit-loading">
+      <span class="spinner"></span>
+      Sending...
+    </span>
+  </button>
+
+  <div class="feedback-footer">
+    <p>Your feedback helps us improve!</p>
+  </div>
+</div>

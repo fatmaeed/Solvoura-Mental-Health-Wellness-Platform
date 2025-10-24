@@ -1,0 +1,29 @@
+<section class="illness-section py-5" id="illness" style="background-color: #f7f9fa;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold text-dark mb-3">Common Illnesses</h2>
+      <p class="lead text-muted mx-auto" style="max-width: 600px;">
+        Discover common illnesses and their descriptions
+      </p>
+    </div>
+    @if (isLoading) {
+      <div class="d-flex justify-content-center my-5">
+        <app-loading-component></app-loading-component>
+      </div>
+    } @else {
+      <div class="row g-4 justify-content-center">
+        @for (illness of illnesses; track $index) {
+          <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="h-100" style="transition: transform 0.3s ease;">
+              <app-illness-card [illness]="illness"></app-illness-card>
+            </div>
+          </div>
+        } @empty {
+          <div class="col-12">
+            <app-empty-component [message]="'No illnesses found'"></app-empty-component>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

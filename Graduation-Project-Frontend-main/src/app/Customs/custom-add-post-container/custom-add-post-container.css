@@ -1,0 +1,43 @@
+.post-creator {
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1.5rem;
+}
+  .btn-custom{
+    color: #fff;
+    background-color: #6494c4;
+  }
+  .btn-custom:hover{
+    color: #6494c4;
+    background-color: #fff;
+    border: 1px solid #6494c4;
+  }
+  .btn-img{
+    color: #6494c4;
+    background-color: #fff;
+    border: 1px solid #6494c4;
+  }
+  .btn-img:hover{
+    color: #fff;
+    background-color: #6494c4;
+    border: 1px solid #6494c4;
+  }
+.post-creator textarea {
+  font-size: 15px;
+  min-height: 100px;
+  transition: all 0.2s;
+}
+
+.post-creator textarea:focus {
+  background-color: #fff !important;
+  box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+  border: 1px solid #6494c4 !important;
+}
+
+.post-creator .btn-outline-secondary {
+  border-color: #e0e0e0;
+}
+
+.post-creator .btn-outline-secondary:hover {
+  background-color: #f8f9fa;
+}

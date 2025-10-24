@@ -1,0 +1,24 @@
+@if(notification && isVisible){
+<div
+  class="notification"
+  [ngClass]="'notification-' + notification.type"
+  (click)="notification.routing && handleClick()"
+  [class.unread]="!notification.read"
+>
+  <div class="notification-header">
+    <h4 class="notification-title">{{ notification.title }}</h4>
+    <span class="notification-time"
+      >{{ notification.notificationTime| date:'shortTime' }}</span
+    >
+  </div>
+  <div class="notification-content">{{ notification.message }}</div>
+
+  <div class="notification-footer">
+    <span class="sender">From:{{ notification.senderName || 'System'}}</span>
+  </div>
+
+  <button class="close-button" (click)="hide(); $event.stopPropagation()">
+    &times;
+  </button>
+</div>
+}

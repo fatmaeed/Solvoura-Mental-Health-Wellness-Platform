@@ -1,0 +1,59 @@
+<app-nav-bar></app-nav-bar>
+<div class="professionals-section" id="professionals">
+  <div class="container">
+    <!-- Title -->
+    <div class="section-header text-center">
+      <h2 class="section-title">Meet Our Professionals</h2>
+      <p class="section-subtitle">
+        Licensed, experienced mental health professionals ready to support your journey
+      </p>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="filter-container">
+      <button class="reset-filters" (click)="resetFilters()">Reset Filters</button>
+
+      <!-- Search Input -->
+      <div class="search-input">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="applyFilters()"
+          placeholder="Search by name or specialty..."
+          class="search-field"
+        />
+      </div>
+
+      <!-- Specialization Dropdown -->
+      <div class="filter-dropdown">
+        <select
+          class="specialization-select"
+          [(ngModel)]="selectedSpecialization"
+          (change)="applyFilters()"
+        >
+          <option value="">All Specializations</option>
+          @for (spec of specializations; track spec) {
+            <option [value]="spec">{{ spec }}</option>
+          }
+        </select>
+      </div>
+    </div>
+
+    <!-- Professionals Grid -->
+    <div class="professionals-grid">
+      @for (provider of filteredProviders; track $index) {
+        <div class="professional-card-wrapper">
+          <div class="professional-card">
+            <app-service-provider-card [provider]="provider"></app-service-provider-card>
+          </div>
+        </div>
+      }
+
+      @if (filteredProviders.length === 0) {
+        <div class="no-results">
+          <p>No professionals match your search or filters.</p>
+        </div>
+      }
+    </div>
+  </div>
+</div>

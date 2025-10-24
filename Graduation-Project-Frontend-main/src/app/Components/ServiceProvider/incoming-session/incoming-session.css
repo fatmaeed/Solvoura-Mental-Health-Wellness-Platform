@@ -1,0 +1,342 @@
+.therapy-sessions-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fff;
+}
+.content-header {
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.page-title {
+text-align: start;  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, #6494c4, #8cc2a7);
+    border-radius: 3px;
+  }
+}
+
+/* Empty State */
+.no-sessions-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+  text-align: center;
+}
+
+.empty-state {
+  max-width: 500px;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.empty-state i {
+  font-size: 3.5rem;
+  color: #86bdab;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+  font-size: 1.75rem;
+  color: #2d3748;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.empty-state p {
+  color: #718096;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.browse-doctors-btn {
+  background-color: #86bdab;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.browse-doctors-btn:hover {
+  background-color: #76a898;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(134, 189, 171, 0.3);
+}
+
+/* Sessions Grid */
+.sessions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
+  padding: 1rem 0;
+}
+.start-session-btn.missed {
+  background-color: #dc3545;
+  opacity: 0.9;
+      display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+    color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.start-session-btn.missed:hover {
+  background-color: #c82333;
+  transform: none;
+  box-shadow: none;
+}
+.session-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+.session-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Session Header */
+.session-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #edf2f7;
+  background: linear-gradient(135deg, #f8fafc, white);
+}
+
+.doctor-info {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.doctor-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #e8f4f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #86bdab;
+  font-size: 1.75rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.doctor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.doctor-name {
+  font-size: 1.25rem;
+  color: #2d3748;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.session-specialty {
+  display: block;
+  font-size: 0.9rem;
+  color: #86bdab;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.session-status {
+  font-size: 0.85rem;
+  color: white;
+  background: #86bdab;
+  padding: 0.35rem 0.9rem;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Session Details */
+.session-details {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.detail-item i {
+  font-size: 1.4rem;
+  color: #86bdab;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.detail-label {
+  display: block;
+  font-size: 0.85rem;
+  color: #718096;
+  margin-bottom: 0.25rem;
+}
+
+.detail-value {
+  font-size: 1rem;
+  color: #2d3748;
+  font-weight: 500;
+}
+
+/* Session Actions */
+.session-actions {
+  padding: 1.25rem;
+  border-top: 1px solid #edf2f7;
+  display: flex;
+  gap: 1rem;
+}
+.not-started{
+    display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #e2e8f0;
+  font-weight: 500;
+  color: #000;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+.start-session-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #7fb3a1;
+  color: white;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.start-session-btn:hover {
+  background: #76a898;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(134, 189, 171, 0.3);
+}
+
+.reschedule-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: white;
+  color: #86bdab;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid #86bdab;
+  cursor: pointer;
+}
+
+.reschedule-btn:hover {
+  background: #f0f7f4;
+  transform: translateY(-2px);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .sessions-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .therapy-sessions-container {
+    padding: 1.5rem;
+  }
+
+  .session-details {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .session-actions {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sessions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .doctor-info {
+    flex-direction: column;
+    text-align: center;
+    align-items: flex-start;
+  }
+
+  .doctor-avatar {
+    margin-bottom: 1rem;
+  }
+
+  .empty-state {
+    padding: 2rem 1.5rem;
+  }
+
+  .empty-state i {
+    font-size: 3rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,154 @@
+@for (post of posts; track post.id) {
+  <div class="fb-post-card">
+    <div class="post-header">
+      <div class="author-info">
+        <div class="author-avatar">
+          <div class="avatar-initials">
+            {{ getInitials(getUserName(post.clientId ?? null, post.serviceProviderId ?? null)) }}
+          </div>
+        </div>
+        <div class="author-details">
+          <span class="author-name">
+            {{ getUserName(post.clientId ?? null, post.serviceProviderId ?? null) }}
+            @if (post.serviceProviderId) {
+              <span class="verified-badge">
+                <i class="bi bi-patch-check-fill"></i>
+              </span>
+            }
+          </span>
+          <span class="post-time">{{post.date}}<i class="bi bi-globe-americas"></i></span>
+        </div>
+      </div>
+
+      @if (isUserPost(post) || isAdmin()) {
+        <div class="post-options">
+          <div class="dropdown">
+            <i
+              class="bi bi-three-dots"
+              (click)="toggleDropdown(post.id)"
+              style="cursor: pointer;">
+            </i>
+            <ul
+              class="dropdown-menu"
+              [class.show]="dropdownOpenPostId === post.id"
+              style="display: block; position: absolute;">
+              <li *ngIf="!isAdmin()">
+                <button class="dropdown-item" (click)="editPost(post)">
+                  <i class="bi bi-pencil"></i> Edit
+                </button>
+              </li>
+              <li><hr class="dropdown-divider" /></li>
+              <li>
+                <button
+                  class="dropdown-item text-danger"
+                  (click)="deletePost(post.id)">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Post Content -->
+    <div class="post-content">
+      <p class="post-text">{{ post.body }}</p>
+    </div>
+
+    <!-- Post Stats -->
+    <div class="post-stats">
+      <span class="likes-count">
+        <i class="bi bi-hand-thumbs-up-fill"></i> {{post.likes}}
+      </span>
+      <span class="comments-count">
+        {{ commentCounts[post.id] !== undefined ? commentCounts[post.id] : 0 }} comments
+      </span>
+    </div>
+
+    <!-- Post Actions -->
+    <div class="post-actions">
+      <button class="action-btn like-btn" (click)="toggleLike(post)"
+        [ngClass]="post.isLikedByCurrentUser ? 'liked' : 'action-btn'">
+        <span><i class="bi bi-hand-thumbs-up"></i> Like</span>
+      </button>
+      <button class="action-btn comment-btn" (click)="toggleComments(post.id)">
+        <i class="bi bi-chat-left-text"></i> {{ selectedPostId === post.id ? 'Hide' : 'Comment' }}
+      </button>
+      <button class="action-btn share-btn">
+        <i class="bi bi-share"></i> Share
+      </button>
+    </div>
+
+    <!-- Comments Section -->
+    @if (selectedPostId === post.id) {
+      <div class="comments-section">
+        <div class="comments-header">
+          <h4 class="comments-title">
+            <i class="bi bi-chat-square-text"></i> Comments
+            <span class="comment-count" *ngIf="postComments.length > 0">({{ postComments.length }})</span>
+          </h4>
+        </div>
+
+        @if (postComments.length > 0) {
+          <div class="comments-list">
+            @for (comment of postComments; track comment.id) {
+              <div class="comment">
+                <div class="comment-avatar">
+                  <div class="avatar-initials small">
+                    {{ getInitials(getUserName(comment.clientId ?? null, comment.serviceProviderId ?? null)) }}
+                  </div>
+                </div>
+                <div class="comment-content">
+                  <div class="comment-header">
+                    <span class="comment-author">
+                      {{ getUserName(comment.clientId ?? null, comment.serviceProviderId ?? null) }}
+                    </span>
+                    <span class="comment-actions float-end">
+                      <button class="reply-btn">Like</button>
+                      <button class="reply-btn">Reply</button>
+                      <button *ngIf="canDeleteComment(comment)" class="reply-btn text-danger"
+                              (click)="deleteComment(comment.id)">
+                        <i class="bi bi-trash"></i> Delete
+                      </button>
+                    </span>
+                  </div>
+                  <div class="comment-body">{{ comment.body }}</div>
+                </div>
+              </div>
+            }
+          </div>
+        } @else {
+          <p class="no-comments">
+            <i class="bi bi-chat-square"></i> No comments yet. Be the first to comment!
+          </p>
+        }
+
+        <!-- Comment Form (Hidden for Admins) -->
+        <div class="comment-form" *ngIf="isLoggedIn() && !isAdmin()">
+          <div class="comment-avatar">
+            <div class="avatar-initials small">
+              {{ getInitials(getUserName(currentUserId ?? null, currentUserId ?? null)) }}
+            </div>
+          </div>
+          <div class="comment-input-container">
+            <textarea [(ngModel)]="newCommentBody"
+                      placeholder="Write a comment..."
+                      rows="1"
+                      class="comment-input"></textarea>
+            <button class="submit-comment" (click)="addComment()">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="!isLoggedIn()" class="alert alert-info mb-3">
+          <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-circle-fill me-2"></i>
+            <span>Please log in to add comment</span>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

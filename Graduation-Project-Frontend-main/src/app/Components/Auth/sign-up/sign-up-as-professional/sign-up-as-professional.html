@@ -1,0 +1,314 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data" class="signup-form text-start">
+  @if (errorMessage) {
+    <div class="error-banner">
+      <i class="error-icon">!</i>
+      <span>{{ errorMessage }}</span>
+    </div>
+  }
+
+  <div class="form-section">
+
+    <div class="form-group name-group">
+      <div class="form-field">
+        <label>First Name</label>
+        <input type="text" formControlName="firstName" placeholder="Enter your first name" />
+        <div *ngIf="signupForm.get('firstName')?.invalid && signupForm.get('firstName')?.touched" class="error-message">
+          <i class="error-icon">!</i> First name is required
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Last Name</label>
+        <input type="text" formControlName="lastName" placeholder="Enter your last name" />
+        <div *ngIf="signupForm.get('lastName')?.invalid && signupForm.get('lastName')?.touched" class="error-message">
+          <i class="error-icon">!</i> Last name is required
+        </div>
+      </div>
+    </div>
+<div class="form-section d-flex flex-row gap-4">
+    <div class="form-field">
+      <label>Email Address</label>
+      <input type="email" formControlName="email" placeholder="example@domain.com" />
+      <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched" class="error-message">
+        <i class="error-icon">!</i> Please enter a valid email
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label>Phone Number</label>
+      <input type="tel" formControlName="phone" placeholder="01012345678" />
+      <div *ngIf="signupForm.get('phone')?.invalid && signupForm.get('phone')?.touched" class="error-message">
+        <i class="error-icon">!</i> Please enter a valid phone number
+      </div>
+    </div>
+  </div>
+  <div class="form-section d-flex flex-row gap-4">
+
+    <div class="form-field">
+      <label for="dob">Date of Birth</label>
+      <input id="dob" type="date" formControlName="dob" />
+      @if (signupForm.get('dob')?.invalid && signupForm.get('dob')?.touched) {
+        <div class="error-message"><i class="error-icon">!</i> Date of birth is required</div>
+      }
+    </div>
+
+    <div class="form-field">
+      <label for="gender">Gender</label>
+      <select id="gender" formControlName="gender">
+        <option value="" disabled selected>Select your gender</option>
+        <option [value]="0">Male</option>
+        <option [value]="1">Female</option>
+      </select>
+      @if (signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched) {
+        <div class="error-message"><i class="error-icon">!</i> Gender is required</div>
+      }
+    </div>
+  </div>
+  <div class="form-section d-flex flex-row gap-4">
+
+    <div class="form-field">
+      <label>Address</label>
+      <input type="text" formControlName="address" placeholder="Your full address" />
+      <div *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched" class="error-message">
+        <i class="error-icon">!</i> Address is required
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label>National ID Number</label>
+      <input type="text" formControlName="nationalNumber" placeholder="14-digit national ID" />
+      <div *ngIf="signupForm.get('nationalNumber')?.invalid && signupForm.get('nationalNumber')?.touched" class="error-message">
+        <i class="error-icon">!</i> Must be exactly 14 digits
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="form-section">
+
+    <div class="form-field">
+      <label>Username</label>
+      <input type="text" formControlName="username" placeholder="Choose a username" />
+      <div *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched" class="error-message">
+        <i class="error-icon">!</i> Username is required
+      </div>
+    </div>
+
+    <div class="form-field d-flex flex-row gap-3">
+      <div class="form-field">
+        <label for="password">Password</label>
+        <div class="password-input">
+          <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Create password" />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('password')">
+            <span [innerHTML]="showPassword ? eyeFillIcon : eyeIcon"></span>
+          </button>
+        </div>
+        @if (signupForm.get('password')?.invalid && signupForm.get('password')?.touched) {
+          <div class="error-message text-start">Password must be at least 8 characters</div>
+        }
+      </div>
+
+      <div class="form-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="password-input">
+          <input id="confirmPassword" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword" placeholder="Confirm password" />
+          <button type="button" class="toggle-password" (click)="togglePasswordVisibility('confirmPassword')">
+            <span [innerHTML]="showConfirmPassword ? eyeFillIcon : eyeIcon"></span>
+          </button>
+        </div>
+        @if (signupForm.get('confirmPassword')?.invalid && signupForm.get('confirmPassword')?.touched) {
+          <div class="error-message text-start">Please confirm your password</div>
+        }
+        @if (signupForm.get('password')?.value && signupForm.get('confirmPassword')?.value && signupForm.get('password')?.value !== signupForm.get('confirmPassword')?.value) {
+          <div class="error-message text-start">Passwords do not match</div>
+        }
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-section">
+    <div class="form-section d-flex flex-row gap-4">
+
+    <div class="form-field">
+      <label>Specialization</label>
+      <select formControlName="specialization">
+        <option value="" disabled selected>Select specialization</option>
+        <option value="0">Doctor</option>
+        <option value="1">Specialist</option>
+        <option value="2">Speech Therapist</option>
+        <option value="3">Life Coache</option>
+        <option value="4">Therapist</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label>Experience (Years)</label>
+      <input type="number" formControlName="experienceInYears" placeholder="Years of experience" min="0" />
+    </div>
+    </div>
+    <div class="form-field">
+      <label>Description</label>
+      <textarea formControlName="description" rows="3" placeholder="Tell us about your professional background"></textarea>
+      <div *ngIf="signupForm.get('description')?.invalid && signupForm.get('description')?.touched" class="error-message">
+        <i class="error-icon">!</i> Minimum 10 characters
+      </div>
+    </div>
+
+    <div class="form-field">
+      <label>Experience Description (optional)</label>
+      <textarea formControlName="experienceDescription" rows="2" placeholder="Details about your experience"></textarea>
+    </div>
+    <div class="form-section d-flex flex-row gap-4">
+
+    <div class="form-field">
+      <label>Price Per Hour (EGP)</label>
+      <input type="number" formControlName="pricePerHour" placeholder="Consultation fee per hour" min="0" />
+    </div>
+
+    <div class="form-field">
+      <label>Examination Type</label>
+      <select formControlName="examinationType">
+        <option value="" disabled selected>Select examination type </option>
+        <option value="0">Online</option>
+        <option value="1">Offline</option>
+        <option value="2">Both</option>
+      </select>
+    </div>
+    </div>
+    <div class="form-section d-flex flex-row gap-4">
+
+    <div class="form-field">
+      <label>Clinic Location (optional)</label>
+      <input type="text" formControlName="clinicLocation" placeholder="Your clinic address" />
+    </div>
+  </div>
+
+  <div class="form-section">
+
+<!-- User Image Upload -->
+<div class="form-field file-upload">
+  <label>User Image</label>
+  <div class="file-input-wrapper">
+    <input type="file" (change)="onFileChange($event, 'userImage')" id="userImage" accept="image/*" />
+    <label for="userImage" class="file-input-label">
+      <i class="upload-icon">upload</i>
+      <span>Choose profile photo</span>
+    </label>
+  </div>
+  @if (userImagePreview) {
+    <div class="preview">
+      <img [src]="userImagePreview" class="preview-img" alt="User Image Preview" />
+      <button type="button" class="remove-image-btn" (click)="removeImage('userImage')">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+  }
+</div>
+
+<!-- National ID Image Upload -->
+<div class="form-field file-upload">
+  <label>National ID Image</label>
+  <div class="file-input-wrapper">
+    <input type="file" (change)="onFileChange($event, 'nationalImage')" id="nationalImage" accept="image/*" />
+    <label for="nationalImage" class="file-input-label">
+      <i class="upload-icon">upload</i>
+      <span>Choose national ID image</span>
+    </label>
+  </div>
+  @if (nationalImagePreview) {
+    <div class="preview">
+      <img [src]="nationalImagePreview" class="preview-img" alt="National ID Preview" />
+      <button type="button" class="remove-image-btn" (click)="removeImage('nationalImage')">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+  }
+</div>
+
+<!-- User + National ID Combined Image Upload -->
+<div class="form-field file-upload">
+  <label>User + National ID Combined Image</label>
+  <div class="file-input-wrapper">
+    <input type="file" (change)="onFileChange($event, 'userAndNationalImage')" id="userAndNationalImage" accept="image/*" />
+    <label for="userAndNationalImage" class="file-input-label">
+      <i class="upload-icon">upload</i>
+      <span>Choose combined image</span>
+    </label>
+  </div>
+  @if (userAndNationalImagePreview) {
+    <div class="preview">
+      <img [src]="userAndNationalImagePreview" class="preview-img" alt="Combined Image Preview" />
+      <button type="button" class="remove-image-btn" (click)="removeImage('userAndNationalImage')">
+        <i class="bi bi-x-circle"></i>
+      </button>
+    </div>
+  }
+</div>
+
+
+<div class="form-section certificates-section">
+  <h3 class="section-title">Certificates</h3>
+  <p class="section-description">Add your professional certificates and qualifications</p>
+
+  <div formArrayName="certificates">
+    <div *ngFor="let cert of certificates.controls; let i = index" [formGroupName]="i" class="certificate-item">
+      <!-- Certificate Image Upload with Preview -->
+      <div class="form-field file-upload">
+        <label>Certificate Image</label>
+        <div class="file-input-wrapper">
+          <input type="file" (change)="onCertificateFileChange($event, i)" id="certificateImage{{i}}" accept="image/*" />
+          <label for="certificateImage{{i}}" class="file-input-label">
+            <i class="upload-icon">upload</i>
+            <span>Choose certificate image</span>
+          </label>
+        </div>
+        <div *ngIf="certificateImagePreviews[i]" class="preview">
+          <img [src]="certificateImagePreviews[i]" class="preview-img" alt="Certificate Preview {{i + 1}}" />
+          <button type="button" class="remove-image-btn" (click)="removeCertificateImage(i)">
+            <i class="bi bi-x-circle"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Certificate Details -->
+      <div class="form-field">
+        <label>Certificate Name</label>
+        <input type="text" formControlName="certificateName" placeholder="Certificate title" />
+      </div>
+
+      <div class="form-field">
+        <label>Description (optional)</label>
+        <input type="text" formControlName="description" placeholder="Brief description" />
+      </div>
+
+      <div class="form-field">
+        <label>Issue Date</label>
+        <input type="date" formControlName="issueDate" />
+      </div>
+
+      <button type="button" class="remove-certificate" (click)="removeCertificate(i)">
+        <i class="remove-icon">delete</i> Remove Certificate
+      </button>
+    </div>
+  </div>
+</div>
+
+  <button type="button" class="add-certificate" (click)="addCertificate()">
+    <i class="add-icon">add</i> Add Certificate
+  </button>
+</div>
+  </div>
+  <div class="form-field checkbox-field">
+    <input type="checkbox" id="agreeToTerms" formControlName="agreeToTerms" />
+    <label for="agreeToTerms">I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a></label>
+    <div *ngIf="signupForm.get('agreeToTerms')?.invalid && signupForm.get('agreeToTerms')?.touched" class="error-message">
+      <i class="error-icon">!</i> You must agree to the terms
+    </div>
+  </div>
+
+  <button type="submit" class="submit-button" [disabled]="signupForm.invalid">
+     Create Account
+  </button>
+
+
+</form>

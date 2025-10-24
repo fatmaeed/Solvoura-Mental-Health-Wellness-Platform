@@ -1,0 +1,119 @@
+<div class="calendar-view-container">
+
+  <div class="calendar-main">
+    <div class="week-navigation-container">
+      <button class="week-nav-btn" (click)="previousWeek()">
+        <span class="nav-icon">←</span> Previous Week
+      </button>
+      <h4 class="current-week-range">
+        {{ currentWeekStart | date:'mediumDate' }} - {{ currentWeekEnd | date:'mediumDate' }}
+      </h4>
+      <button class="week-nav-btn" (click)="nextWeek()">
+        Next Week <span class="nav-icon">→</span>
+      </button>
+    </div>
+    <div class="calendar-grid">
+      <div class="day-header" *ngFor="let day of currentWeekDays">
+        <div class="day-name">{{ day.date | date:'EEE' }}</div>
+        <div class="day-date" [class.today]="isToday(day.date)">
+          {{ day.date | date:'d' }}
+        </div>
+      </div>
+
+      <div class="day-column" *ngFor="let day of currentWeekDays">
+        <div class="session-event" *ngFor="let session of getSessionsForDay(day.date)"
+          [class.reserved]="session.isReversed" [class.conflict]="hasTimeConflict(session, day.date)">
+          <div class="session-content">
+            <div class="session-time">
+              {{ session.startDateTime | date:'shortTime' }} - {{ session.endDateTime | date:'shortTime' }}
+            </div>
+            <div class="session-type {{ session.type.toLowerCase() }}">
+              {{ session.type === 'Both' ? 'Hybrid' : session.type }}
+            </div>
+            <div class="session-price">{{ session.sessionPrice | currency }}</div>
+            <div class="session-actions d-flex gap-2" *ngIf="!session.isReversed">
+              <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editSessionModal"
+                (click)="loadSession(session.id)">
+                Edit
+              </button>
+              <button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmationDialog"
+                (click)="getSession(session.id)">
+                Delete
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div id="confirmationDialog" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Are you sure?</h5>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete this session? This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="DeleteSession()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div id="editSessionModal" class="modal fade" tabindex="-1"  >
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Edit Session</h5>
+      </div>
+      <div class="modal-body" >
+
+        <form *ngIf="selectedsession">
+          <div class="mb-3">
+            <label for="startDateTime" class="form-label">Start Date & Time</label>
+            <input type="datetime-local" class="form-control" id="startDateTime" [(ngModel)]="selectedsession.startDateTime"
+              name="startDateTime">
+          </div>
+
+          <div class="mb-3">
+            <label for="duration" class="form-label">Duration (HH:MM:SS)</label>
+            <input type="text" class="form-control" id="duration" [(ngModel)]="selectedsession.duration!" name="duration"
+              placeholder="HH:MM:SS">
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Type</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="online" [(ngModel)]="selectedsession.type!" name="type"
+                [value]="1">
+              <label class="form-check-label" for="online">Online</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="offline" [(ngModel)]="selectedsession.type!" name="type"
+                [value]="0">
+              <label class="form-check-label" for="offline">Offline</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" id="both" [(ngModel)]="selectedsession.type!" name="type"
+                [value]="2">
+              <label class="form-check-label" for="both">Hybird</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="updateSession()">Save
+          Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+

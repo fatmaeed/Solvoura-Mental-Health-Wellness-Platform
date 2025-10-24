@@ -1,0 +1,70 @@
+.notification-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  border: 1px solid #e0e8f0;
+}
+
+.notification-icon {
+  margin-bottom: 20px;
+}
+
+.notification-icon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.notification-title {
+  color: #2c3e50;
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.notification-message {
+  color: #333;
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.notification-email {
+  background-color: #f5f7fa;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.notification-email strong {
+  color: #2c3e50;
+  font-weight: 500;
+}
+
+.notification-help {
+  font-size: 14px;
+  color: #7f8c8d;
+  margin-top: 20px;
+}
+
+.resend-link {
+  color: #558edb;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.resend-link:hover {
+  color: #3a7bd5;
+  text-decoration: underline;
+}

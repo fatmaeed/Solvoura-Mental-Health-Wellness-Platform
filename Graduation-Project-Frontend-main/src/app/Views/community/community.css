@@ -1,0 +1,62 @@
+.community-container {
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.community-header {
+  background: linear-gradient(135deg, #6494c4 0%, #87b5e0 100%);
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+}
+
+.btn-home{
+  margin: 1rem;
+  background-color: #fff;
+  color: #6494c4;
+  border: 1px solid #6494c4;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.btn-home:hover{
+  margin: 1rem;
+  background-color: #6494c4;
+  color: white;
+
+}
+.community-content {
+  padding-top: 2rem;
+}
+
+.posts-list {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.sort-options .btn-group .btn {
+  border-radius: 20px !important;
+  margin-left: 0.5rem;
+}
+
+.sort-options .btn-group .btn.active {
+  background-color: #0d6efd;
+  color: white;
+}
+
+.sticky-top {
+  position: sticky;
+  top: 0;
+}
+
+@media (max-width: 992px) {
+  .community-content {
+    padding-top: 1rem;
+  }
+
+  .header-actions {
+    display: none;
+  }
+}

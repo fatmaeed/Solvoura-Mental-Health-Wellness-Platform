@@ -1,0 +1,169 @@
+<app-nav-bar></app-nav-bar>
+@if (accountService.isLoggedIn()) {
+
+<div class="container-fluid dashboard-container">
+  <div class="row g-0">
+    <main class="col-12 px-md-4 py-4">
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card welcome-card border-0 shadow">
+            <div class="card-body p-4">
+              <div class="row align-items-center">
+                <div class="col-md-8 mb-3 mb-md-0">
+                  <h4 class="card-title text-white mb-2">
+                    Welcome back, {{Client.firstName}} {{Client.lastName}}!
+                  </h4>
+                  <p class="card-text text-white-80 mb-0">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    You have {{clientSessions.length}} upcoming
+                    appointment{{clientSessions.length !== 1 ? 's' : ''}} this
+                    week
+                  </p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                  @if (Client.userImagePath) {
+                  <img
+                    [src]="apiUrl + Client.userImagePath"
+                    alt="Profile"
+                    class="img-fluid rounded-circle profile-img shadow"
+                    style="width: 100px; height: 100px"
+                  />
+                  } @else {
+                  <div class="avatar-circle shadow">
+                    {{ Client.firstName?.charAt(0).toUpperCase() }}{{
+                    Client.lastName?.charAt(0).toUpperCase() }}
+                  </div>
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+              <ul
+                class="nav nav-tabs nav-justified"
+                id="dashboardTabs"
+                role="tablist"
+              >
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link active"
+                    id="appointments-tab"
+                    routerLink="client-session"
+                    routerLinkActive="active"
+                    data-bs-toggle="tab"
+                    type="button"
+                    role="tab"
+                  >
+                    <i class="bi bi-calendar2-week me-2"></i>Appointments
+                  </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <button
+                    class="nav-link"
+                    id="information-tab"
+                    data-bs-toggle="tab"
+                    [routerLink]="['client-info']"
+                    routerLinkActive="active"
+                    type="button"
+                    role="tab"
+                  >
+                    <i class="bi bi-person-circle me-2"></i>My Information
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="dashboardTabsContent">
+        <div
+          class="tab-pane fade show active"
+          id="appointments"
+          role="tabpanel"
+        >
+          <router-outlet></router-outlet>
+        </div>
+        <div class="tab-pane fade" id="information" role="tabpanel"></div>
+      </div>
+
+      <!-- <div class="row mt-4">
+        <div class="col-12">
+          <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0 py-3">
+              <h5 class="m-0 fw-semibold">
+                <i class="bi bi-info-circle  me-2"></i>
+                Online Session Instructions
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                  <div class="instruction-section">
+                    <h6 class="fw-semibold  mb-3">
+                      <i class="bi bi-clock-history me-2"></i>Before Your Session
+                    </h6>
+                    <ol class="list-group list-group-numbered border-0">
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-start">
+                        <span class="me-2">1.</span>
+                        <span>Test your internet connection and device</span>
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-start">
+                        <span class="me-2">2.</span>
+                        <span>Use Chrome or Firefox for best experience</span>
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-start">
+                        <span class="me-2">3.</span>
+                        <span>Find a quiet, private space for your session</span>
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-start">
+                        <span class="me-2">4.</span>
+                        <span>Have your medical records ready if needed</span>
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-start">
+                        <span class="me-2">5.</span>
+                        <span>Join the session 5 minutes early</span>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="instruction-section">
+                    <h6 class="fw-semibold  mb-3">
+                      <i class="bi bi-gear me-2"></i>Technical Requirements
+                    </h6>
+                    <ul class="list-group border-0">
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        Stable internet connection (min 5Mbps)
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        Webcam and microphone
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        Updated browser (Chrome, Firefox, Edge)
+                      </li>
+                      <li class="list-group-item border-0 bg-transparent d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill text-success me-2"></i>
+                        Disable VPN if connection issues occur
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </main>
+  </div>
+</div>
+}

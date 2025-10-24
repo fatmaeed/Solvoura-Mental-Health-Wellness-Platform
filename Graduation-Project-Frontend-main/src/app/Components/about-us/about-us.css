@@ -1,0 +1,44 @@
+.about-us {
+  position: relative;
+}
+
+.bg-primary-soft {
+  background-color: rgba(113, 157, 201, 0.1);
+}
+
+.text-primary {
+  color: #719dc9 !important;
+}
+
+.btn-primary {
+  background-color: #719dc9;
+  border-color: #719dc9;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5a8ab8;
+  border-color: #5a8ab8;
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(113, 157, 201, 0.2);
+}
+
+.shadow-sm-hover {
+  transition: all 0.3s ease;
+}
+
+.shadow-sm-hover:hover {
+  box-shadow: 0 7px 14px rgba(113, 157, 201, 0.2) !important;
+}
+
+.btn-outline-primary {
+  color: #719dc9;
+  border-color: #719dc9;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+  background-color: #f0f7ff;
+  color: #5a8ab8;
+  border-color: #5a8ab8;
+}

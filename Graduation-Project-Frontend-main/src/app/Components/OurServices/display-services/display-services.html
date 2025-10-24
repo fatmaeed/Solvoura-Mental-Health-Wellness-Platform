@@ -1,0 +1,12 @@
+<section class="py-5 bg-light-green text-center" id="services">
+  <h2 class="fs-3 fw-bold mb-1">Why Choose MindConnect?</h2>
+  <p class="lead fs-6 fw-light text-muted mb-5">
+    Built with your privacy, comfort, and convenience in mind
+  </p>
+
+  <div class="d-flex flex-wrap justify-content-center gap-5">
+    @for (f of Services; track f) {
+      <feature-card [feature]="f" />
+    }
+  </div>
+</section>

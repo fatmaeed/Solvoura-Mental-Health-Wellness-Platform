@@ -1,0 +1,47 @@
+<div class="flip-card mx-auto" style="perspective: 1000px; width: 100%; max-width: 260px; height: 220px;">
+  <div class="flip-card-inner position-relative w-100 h-100" style="transition: transform 0.7s ease; transform-style: preserve-3d;">
+
+    <!-- Front Side -->
+    <div class="flip-card-front card h-100 border-0 p-4 d-flex flex-column align-items-center"
+         style="border-radius: 12px; backface-visibility: hidden; background: white; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+
+      <div class="position-relative mb-4"
+           style="width: 100px; height: 100px; border-radius: 12px; overflow: hidden; background: linear-gradient(135deg, #719dc9 0%, #5a8ab8 100%);">
+        <ng-container *ngIf="showImage; else fallbackIcon">
+          <img [src]="illness.image"
+               (error)="onImageError()"
+               alt="{{ illness.illnessName }}"
+               class="w-100 h-100 object-fit-cover"
+               style="transition: all 0.4s ease; mix-blend-mode: multiply; opacity: 0.9;">
+        </ng-container>
+        <ng-template #fallbackIcon>
+          <div class="w-100 h-100 d-flex justify-content-center align-items-center text-white">
+            <i class="bi bi-heart-pulse text-white" style="font-size: 2rem;"></i>
+          </div>
+        </ng-template>
+      </div>
+
+      <!-- Title & Tag -->
+      <h3 class="h5 fw-bold mb-2 text-center text-dark">{{ illness.illnessName }}</h3>
+      <span class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-1 rounded-pill small">
+        {{ illness.symptoms || 'Condition' }}
+      </span>
+
+      <p class="small text-muted mb-0 text-center">
+        <i class="bi bi-arrow-repeat me-1"></i> Hover to learn more
+      </p>
+    </div>
+
+    <!-- Back Side -->
+    <div class="flip-card-back card h-100 border-0 p-4  d-flex flex-column justify-content-start"
+         style="border-radius: 12px; backface-visibility: hidden; transform: rotateY(180deg); background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%); box-shadow: 0 4px 20px rgba(113, 157, 201, 0.15);">
+         <h3 class="h5 fw-bold mb-2 mt-0 text-center text-dark">Description</h3>
+
+      <p class="small text-muted mb-1" style="line-height: 1.6;">
+        {{ illness.illnessDescription }}
+      </p>
+
+    </div>
+
+  </div>
+</div>

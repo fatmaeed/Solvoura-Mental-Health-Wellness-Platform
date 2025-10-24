@@ -1,0 +1,26 @@
+.nf-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #dfe6ef 0%, #d9e3ea 100%);
+}
+
+.nf-logo {
+  color: #2b6cb0;
+  i {
+    font-size: 1.75rem;
+  }
+}
+
+.nf-badge {
+  width: 120px;
+  height: 120px;
+  background: #e7f1f7;
+}
+
+.gradient-btn {
+  background: linear-gradient(90deg, #4d7cbd, #9cb9d8);
+  border: none;
+}
+
+.gradient-btn:hover {
+  filter: brightness(1.05);
+}
